@@ -1,0 +1,2 @@
+TestGraveyardMidwayProgression: PASS on skills 1, 3 and 4.
+Actual collision, steps, item/key pickups, blue and red key rejection before pickups, door use traces and exit activation. No monsters for this route check.

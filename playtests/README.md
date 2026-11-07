@@ -15,6 +15,19 @@ pinned WAD. It completes the earlier layout in 3:00.11 with all kills and secret
 The `showcase/` folder contains two intermediate weighted-control experiments;
 attempt 06 intentionally stops after collecting the blue key and is not a full run.
 
+## Map 2
+
+The new Map 2 recording is [map02/attempt-02-midway](map02/README.md): a completed
+HMP run with 54/54 kills, 3/3 secrets and a cleared bumper-car tour. It replays
+exactly in GD-DOOM and independently completes with rendering in Chocolate Doom.
+
+```bash
+./playtests/watch.sh attempt-02-midway --iwad /path/to/DOOM1.WAD
+```
+
+`map02-early-layout/` retains a failed first attempt before the encounter doors
+were added, along with its matching WAD.
+
 ## Watch
 
 From this mapset repository root (with `gddoom` installed or `GD_DOOM_BIN` set):

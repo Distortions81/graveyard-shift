@@ -2,22 +2,22 @@
   "map": "E1M1",
   "title": "Admission Is Mandatory",
   "format": "vanilla Doom",
-  "vertices": 874,
-  "linedefs": 977,
-  "sectors": 70,
-  "subsectors": 349,
-  "nodes": 348,
+  "vertices": 1178,
+  "linedefs": 1297,
+  "sectors": 84,
+  "subsectors": 587,
+  "nodes": 586,
   "secrets": 3,
   "actions": {
     "SW1GARG": [
-      30,
-      34
+      31,
+      35
     ],
     "snack door": [
-      58,
-      59,
-      73,
-      76
+      61,
+      62,
+      74,
+      77
     ],
     "security door": [
       171,
@@ -26,35 +26,35 @@
       195
     ],
     "SW1COMM": [
-      495,
-      496
+      496,
+      497
     ],
     "garden door": [
-      526,
-      541,
-      542,
-      555,
-      556
+      525,
+      539,
+      540,
+      558,
+      559
     ],
     "admission gate": [
+      608,
       609,
       610,
-      611,
-      613,
-      624,
-      626,
-      627,
-      629
+      612,
+      619,
+      621,
+      622,
+      624
     ],
     "courtyard ambush": [
-      662,
-      663,
-      664,
-      665
+      657,
+      658,
+      659,
+      660
     ],
     "SW1EXIT": [
-      829,
-      830
+      824,
+      825
     ]
   },
   "sector_labels": {
@@ -62,7 +62,7 @@
     "snack cache": 1,
     "target shutter": 2,
     "sign backing SW1GARG": 3,
-    "service yard": 4,
+    "service yard": 83,
     "stacked crate": 5,
     "low crate": 6,
     "sign backing GSICK": 7,
@@ -76,10 +76,10 @@
     "security door": 15,
     "sign backing GWINDOW": 17,
     "staff stair 1": 18,
-    "park facade": 20,
-    "security lintel": 21,
+    "security lintel": 19,
+    "park facade": 75,
     "staff stair 2": 22,
-    "ticket plaza": 23,
+    "ticket plaza": 79,
     "staff stair 3": 24,
     "arrival": 25,
     "ticket kiosk": 26,
@@ -220,5 +220,14 @@
         "pinky": 3
       }
     }
-  }
+  },
+  "lighting": {
+    "sprite_lights": 6,
+    "light_brushes": 23,
+    "floor_cells_split": 134,
+    "moonlight_direction": "northeast to southwest",
+    "method": "classic sector lighting; small sprite-light pools and architectural moon shadows"
+  },
+  "reachable_grid_cells": 1221,
+  "floor_area_vs_map1": 1.0
 }

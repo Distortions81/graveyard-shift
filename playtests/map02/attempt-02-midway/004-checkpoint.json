@@ -1,0 +1,50 @@
+{
+  "angle": 85.78125,
+  "armor": 100,
+  "attempt": "attempt-02-midway",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 100,
+  "kills": 1,
+  "message": "Picked up a box of shells",
+  "remaining": 53,
+  "screenshot": "/home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/map02/attempt-02-midway/004-checkpoint.png",
+  "seconds": 3.8,
+  "secrets": 0,
+  "sector": 17,
+  "shells": 26,
+  "tic": 133,
+  "total": 54,
+  "visible": [
+    {
+      "id": 34,
+      "type": 3004,
+      "X": 790.3046875,
+      "Y": 734.3046875,
+      "HP": 20,
+      "Distance": 483.61769813625426
+    },
+    {
+      "id": 38,
+      "type": 3001,
+      "X": 931.55859375,
+      "Y": 803.55859375,
+      "HP": 60,
+      "Distance": 610.4794671369009
+    },
+    {
+      "id": 37,
+      "type": 3004,
+      "X": 287.1103515625,
+      "Y": 1568.8896484375,
+      "HP": 20,
+      "Distance": 1320.6303008684383
+    }
+  ],
+  "weapon": 3,
+  "x": 605.7649993896484,
+  "y": 287.2798767089844,
+  "z": 0
+}

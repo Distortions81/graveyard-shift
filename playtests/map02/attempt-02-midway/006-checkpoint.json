@@ -1,0 +1,34 @@
+{
+  "angle": 66.09375,
+  "armor": 93,
+  "attempt": "attempt-02-midway",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 86,
+  "kills": 5,
+  "message": "Monster shot you",
+  "remaining": 49,
+  "screenshot": "/home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/map02/attempt-02-midway/006-checkpoint.png",
+  "seconds": 12.942857142857143,
+  "secrets": 0,
+  "sector": 17,
+  "shells": 22,
+  "tic": 453,
+  "total": 54,
+  "visible": [
+    {
+      "id": 35,
+      "type": 3001,
+      "X": 792.8056640625,
+      "Y": 727.1943359375,
+      "HP": 60,
+      "Distance": 477.2430766934788
+    }
+  ],
+  "weapon": 3,
+  "x": 602.2938842773438,
+  "y": 289.6258087158203,
+  "z": 0
+}

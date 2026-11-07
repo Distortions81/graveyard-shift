@@ -1,0 +1,66 @@
+{
+  "angle": 91.40625,
+  "armor": 0,
+  "attempt": "attempt-01-midway",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 100,
+  "kills": 0,
+  "message": "Picked up a shotgun",
+  "remaining": 54,
+  "screenshot": "/home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/map02/attempt-01-midway/002-first-shotgun.png",
+  "seconds": 1.9428571428571428,
+  "secrets": 0,
+  "sector": 14,
+  "shells": 8,
+  "tic": 68,
+  "total": 54,
+  "visible": [
+    {
+      "id": 33,
+      "type": 3001,
+      "X": 288,
+      "Y": 800,
+      "HP": 60,
+      "Distance": 632.3946576478293
+    },
+    {
+      "id": 34,
+      "type": 3004,
+      "X": 847.677734375,
+      "Y": 847.677734375,
+      "HP": 20,
+      "Distance": 695.7092337799302
+    },
+    {
+      "id": 38,
+      "type": 3001,
+      "X": 1057.779296875,
+      "Y": 929.779296875,
+      "HP": 60,
+      "Distance": 874.8018430864718
+    },
+    {
+      "id": 35,
+      "type": 3001,
+      "X": 416,
+      "Y": 1440,
+      "HP": 60,
+      "Distance": 1224.96520003744
+    },
+    {
+      "id": 51,
+      "type": 3004,
+      "X": -268.525390625,
+      "Y": 1748.525390625,
+      "HP": 20,
+      "Distance": 1729.5316224890641
+    }
+  ],
+  "weapon": 2,
+  "x": 544.0081329345703,
+  "y": 221.74154663085938,
+  "z": 0
+}

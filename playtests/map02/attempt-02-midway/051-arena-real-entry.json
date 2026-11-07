@@ -1,0 +1,66 @@
+{
+  "angle": 1.40625,
+  "armor": 200,
+  "attempt": "attempt-02-midway",
+  "blue_key": true,
+  "bullets": 35,
+  "dead": false,
+  "exited": false,
+  "health": 92,
+  "kills": 34,
+  "message": "USE: door active",
+  "remaining": 20,
+  "screenshot": "/home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/map02/attempt-02-midway/051-arena-real-entry.png",
+  "seconds": 128.05714285714285,
+  "secrets": 2,
+  "sector": 31,
+  "shells": 16,
+  "tic": 4482,
+  "total": 54,
+  "visible": [
+    {
+      "id": 65,
+      "type": 3001,
+      "X": 2084.007354736328,
+      "Y": 653.6261749267578,
+      "HP": 45,
+      "Distance": 836.0335786944893
+    },
+    {
+      "id": 60,
+      "type": 3001,
+      "X": 2366.562286376953,
+      "Y": 658.7813110351562,
+      "HP": 23,
+      "Distance": 1118.6328308625318
+    },
+    {
+      "id": 69,
+      "type": 3004,
+      "X": 2345.2958984375,
+      "Y": 1009.2958984375,
+      "HP": 20,
+      "Distance": 1156.9006444048446
+    },
+    {
+      "id": 70,
+      "type": 3001,
+      "X": 2514.3466796875,
+      "Y": 826.3466796875,
+      "HP": 60,
+      "Distance": 1279.561475345298
+    },
+    {
+      "id": 66,
+      "type": 3004,
+      "X": 2653.25390625,
+      "Y": 571.55859375,
+      "HP": 20,
+      "Distance": 1407.0023241387212
+    }
+  ],
+  "weapon": 5,
+  "x": 1248.0464324951172,
+  "y": 642.6043243408203,
+  "z": 0
+}

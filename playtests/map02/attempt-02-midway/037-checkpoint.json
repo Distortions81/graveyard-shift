@@ -1,0 +1,34 @@
+{
+  "angle": 270,
+  "armor": 200,
+  "attempt": "attempt-02-midway",
+  "blue_key": true,
+  "bullets": 87,
+  "dead": false,
+  "exited": false,
+  "health": 67,
+  "kills": 25,
+  "message": "USE: door active",
+  "remaining": 29,
+  "screenshot": "/home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/map02/attempt-02-midway/037-checkpoint.png",
+  "seconds": 84.48571428571428,
+  "secrets": 2,
+  "sector": 7,
+  "shells": 16,
+  "tic": 2957,
+  "total": 54,
+  "visible": [
+    {
+      "id": 56,
+      "type": 3004,
+      "X": -93.4150390625,
+      "Y": 1760.8056640625,
+      "HP": 20,
+      "Distance": 282.5572149244068
+    }
+  ],
+  "weapon": 5,
+  "x": 160.1977081298828,
+  "y": 1885.3815612792969,
+  "z": 0
+}

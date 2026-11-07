@@ -1,0 +1,8 @@
+{"run":true,"go":[544,224],"resume":"","ticks":140,"forward":0,"side":0,"turn":0,"buttons":0,"angle":null,"target":null,"fight":false,"label":"first-shotgun","reset":"","quit":false}
+{"run":false,"go":[416,224],"resume":"","ticks":70,"forward":0,"side":0,"turn":0,"buttons":0,"angle":null,"target":null,"fight":true,"label":"","reset":"","quit":false}
+{"run":false,"go":[608,288],"resume":"","ticks":90,"forward":0,"side":0,"turn":0,"buttons":0,"angle":null,"target":null,"fight":true,"label":"","reset":"","quit":false}
+{"run":false,"go":null,"resume":"","ticks":220,"forward":0,"side":0,"turn":0,"buttons":0,"angle":90,"target":null,"fight":true,"label":"opening-pressure","reset":"","quit":false}
+{"run":false,"go":[416,640],"resume":"","ticks":110,"forward":0,"side":0,"turn":0,"buttons":0,"angle":null,"target":null,"fight":true,"label":"","reset":"","quit":false}
+{"run":true,"go":[-352,704],"resume":"","ticks":160,"forward":0,"side":0,"turn":0,"buttons":0,"angle":null,"target":null,"fight":true,"label":"","reset":"","quit":false}
+{"run":false,"go":null,"resume":"","ticks":200,"forward":0,"side":0,"turn":0,"buttons":0,"angle":180,"target":null,"fight":true,"label":"gallery-first-pass","reset":"","quit":false}
+{"run":false,"go":null,"resume":"","ticks":0,"forward":0,"side":0,"turn":0,"buttons":0,"angle":null,"target":null,"fight":false,"label":"","reset":"","quit":true}

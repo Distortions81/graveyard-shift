@@ -1,0 +1,2 @@
+TestGraveyardShiftRecordedSessionReplay: PASS
+attempt-02-midway: 9341 tics, 54 kills, 3 secrets, exited=true, dead=false; exact final position, health, armor, ammunition and outcome.

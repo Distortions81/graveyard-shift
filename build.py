@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build Graveyard Shift E1M1: original art, MUS music, and classic DOOM nodes.
+"""Build Graveyard Shift E1M1–E1M2: original art, MUS music, and classic DOOM nodes.
 
 Requires Python 3, Pillow and ZDBSP for the curved geometry. No Boom or engine changes.
 PNG sources are retained in assets/textures; edit them and use --keep-art to rebuild.
@@ -17,6 +17,7 @@ import shutil
 import subprocess
 import tempfile
 import os
+import sys
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = Path(__file__).resolve().parent
@@ -372,6 +373,8 @@ def make_art(keep=False):
     d.rectangle((10,21,53,42),fill=CREAM)
     d.line((31,20,31,44),fill=(89,64,39),width=2)
     art['GLAMP']=im
+    from midway import art as midway_art
+    art.update(midway_art(sys.modules[__name__]))
     folder = HERE/'assets/textures'
     folder.mkdir(parents=True, exist_ok=True)
     for key, im in art.items():
@@ -455,7 +458,7 @@ def art_lumps(art, base):
     textures = []
     texture_defs = {}
     lumps = []
-    flats = {'GASPHALT', 'GPAVING', 'GCHECK', 'GPLANK', 'GGRATE', 'GCARPET', 'GWATER', 'GROOF', 'FWATER1', 'FWATER2', 'FWATER3', 'FWATER4', 'GREDTOP', 'GCREAM', 'GVELVET', 'GLAMP'}
+    flats = {'GASPHALT', 'GPAVING', 'GCHECK', 'GPLANK', 'GGRATE', 'GCARPET', 'GWATER', 'GROOF', 'FWATER1', 'FWATER2', 'FWATER3', 'FWATER4', 'GREDTOP', 'GCREAM', 'GVELVET', 'GLAMP', 'GBFLOOR', 'GSEAT', 'GELECT'}
     for key, im in art.items():
         if key in flats:
             continue
@@ -544,7 +547,8 @@ class Style:
 
 
 class Level:
-    def __init__(self):
+    def __init__(self,map_name='E1M1',title='Admission Is Mandatory'):
+        self.map_name,self.title=map_name,title
         self.cells = {}
         self.carved = set()
         self.extra_polygons = []
@@ -717,12 +721,18 @@ class Level:
                     front, back = back, front
                 for si in [line[5], line[6]]:
                     sides[si][2] = 'GBLUE' if door.label == 'admission gate' else ('GSTRIPE' if door.label in ('garden door', 'snack door') else ('GDOOR' if door.label == 'security door' else 'GSHUTTR'))
-                if door.label == 'admission gate':
+                if door.label in ('admission gate','blue midway gate'):
                     line[3] = 32
+                elif door.label=='red midway gate':
+                    line[3]=33
+                elif door.label.endswith('manual door'):
+                    line[3]=31
                 elif door.label in ('security door', 'garden door', 'snack door'):
                     line[3] = 31
                     if door.label != 'security door':
                         line[2] |= 32  # Automap secret, preserve visible mystery.
+                if door.label in ('blue midway gate','red midway gate'):
+                    for si in [line[5],line[6]]:sides[si][2]=door.wall
                 # Remote shutters/ambush closets have no local use action.
                 if line[3]:
                     action_lines[door.label].append(li)
@@ -814,7 +824,9 @@ class Level:
             textures={tex for i in face for tex in sides[i][2:5] if tex!='-'}
             if not textures or not textures<=aligned:continue
             line[2]|=8|16
-            for i in face:sides[i][1]=-sectors[sides[i][5]].ceil%128
+            for i in face:
+                sec=sectors[sides[i][5]]
+                sides[i][1]=0 if (sec.ceil-sec.floor)%128==0 else -sec.ceil%128
         nodes = []
         def bbox(cells):
             return [(max(y for x,y in cells)+1)*UNIT, min(y for x,y in cells)*UNIT,
@@ -864,14 +876,14 @@ class Level:
             words[4+i] = lists[key]
         assert len(words) < 65536
         pack = lambda fmt, rows: b''.join(struct.pack(fmt,*row) for row in rows)
-        lumps = [('E1M1', b''), ('THINGS', pack('<5h', self.things)), ('LINEDEFS', pack('<7H', lines)),
+        lumps = [(self.map_name, b''), ('THINGS', pack('<5h', self.things)), ('LINEDEFS', pack('<7H', lines)),
                  ('SIDEDEFS', b''.join(struct.pack('<hh8s8s8sH', x,y,name(t),name(b),name(m),s) for x,y,t,b,m,s in sides)),
                  ('VERTEXES', pack('<2h', vertices)), ('SEGS', pack('<6H', segs)),
                  ('SSECTORS', pack('<2H', subsectors)), ('NODES', pack('<12h2H', nodes)),
                  ('SECTORS', b''.join(struct.pack('<hh8s8shhh', s.floor,s.ceil,name(s.flat),name(s.roof),s.light,s.special,s.tag) for s in sectors)),
                  ('REJECT', bytes((len(sectors)**2+7)//8)),
                  ('BLOCKMAP', b''.join(struct.pack('<H', w & 65535) for w in words))]
-        self.manifest = dict(map='E1M1', title='Admission Is Mandatory', format='vanilla Doom',
+        self.manifest = dict(map=self.map_name, title=self.title, format='vanilla Doom',
                              vertices=len(vertices), linedefs=len(lines), sectors=len(sectors),
                              subsectors=len(subsectors), nodes=len(nodes), secrets=sum(s.special == 9 for s in sectors),
                              actions=dict(action_lines), sector_labels={s.label:i for i,s in enumerate(sectors)},
@@ -893,10 +905,10 @@ def make_level():
     plaza = Style('ticket plaza',ceil=176,light=160)
     arrival = Style('arrival', ceil=128, flat='GASPHALT', wall='GBRICK', light=160)
     office = Style('security office', ceil=128, roof='GROOF', flat='GCHECK', wall='GTEAL', light=160)
-    hall = Style('staff corridor', ceil=112, roof='GROOF', flat='GGRATE', wall='GMETAL', light=128)
+    hall = Style('staff corridor', ceil=128, roof='GROOF', flat='GGRATE', wall='GMETAL', light=128)
     yard = Style('service yard', ceil=128, flat='GASPHALT', wall='GBRICK', light=160)
-    control = Style('control booth', floor=112, ceil=256, roof='GROOF', flat='GGRATE', wall='GTEAL', light=192)
-    balcony = Style('balcony', floor=112, ceil=320, flat='GPLANK', wall='GWOOD', light=192)
+    control = Style('control booth', floor=128, ceil=256, roof='GROOF', flat='GGRATE', wall='GTEAL', light=192)
+    balcony = Style('balcony', floor=128, ceil=320, flat='GPLANK', wall='GWOOD', light=192)
     final = Style('welcome courtyard', wall='GFACADE', light=160)
     # Arrival, readable central hub, and the western staff loop.
     l.rect(0,-8,11,0,arrival)
@@ -914,7 +926,7 @@ def make_level():
     for i in range(7):
         l.rect(-3+i,26,-2+i,29,Style(f'staff stair {i+1}', floor=(i+1)*16, flat='GGRATE',wall='GSTEP',light=176))
     l.rect(4,25,11,31,control)
-    l.rect(7,24,10,25,replace(control,label='power shutter',ceil=112,door=True,tag=20))
+    l.rect(7,24,10,25,replace(control,label='power shutter',ceil=128,door=True,tag=20))
     l.rect(4,21,14,24,balcony)
     # Guardrails are small raised sections, leaving a generous 192-unit drop.
     for x0,x1 in [(4,7),(11,14)]:
@@ -983,11 +995,7 @@ def make_level():
             l.cells[x,y]=replace(plaza,label='park facade',ceil=176,wall='GWOOD' if (x+y)%5==0 else 'GFACADE',flat='GPLANK',light=144)
         if style==final and any((x+dx,y+dy) not in l.cells for dx,dy in [(1,0),(-1,0),(0,1),(0,-1)]):
             l.cells[x,y]=replace(final,label='courtyard facade',ceil=160,wall='GWOOD' if (x+y)%5==0 else 'GFACADE',light=144)
-    # Thin masked valances rather than low sky/ceiling slabs above the booths.
-    for x,front in [(0,8),(13,8),(0,15),(14,15)]:
-        a,b=(x,front),(x+2,front)
-        l.panel(a,b,'GFRINGE',plaza)
-        l.edge(a,b,mid='GFRINGE',flags=16,offset=0,width=128)
+    # Kiosk roof edges are part of the booth itself; no detached fringe panels.
     for y in [14,17]:
         l.rect(-11,y,-8,y+1,replace(hall,label='staff ceiling light',roof='GLAMP',light=192))
     l.rect(-16,21,-15,22,replace(yard,label='stacked crate',floor=48,wall='GCRATE',flat='GPLANK'))
@@ -1074,10 +1082,17 @@ def make_level():
     # A shared high sky plane cannot cut across rooms seen from the stairs
     # or balcony. Covered ceilings remain architectural ceilings.
     def high_sky(style):
-        return replace(style,ceil=320) if style.roof=='F_SKY1' else style
+        return replace(style,ceil=384) if style.roof=='F_SKY1' else style
     l.cells={point:high_sky(style) for point,style in l.cells.items()}
     l.extra_polygons=[(poly,high_sky(style)) for poly,style in l.extra_polygons]
     l.extra_panels=[(a,b,texture,high_sky(style),blocking) for a,b,texture,style,blocking in l.extra_panels]
+    from lighting import apply_map1
+    apply_map1(l)
+    mount_wall_signs(l)
+    return l
+
+
+def mount_wall_signs(l,covered=False):
     # Use the existing boundary wall as a normal upper/lower wall face.
     # A closed backing sector outside the playable map splits that same face
     # at sign height, so the poster appears once without any overlaid surface.
@@ -1090,13 +1105,14 @@ def make_level():
             nx,ny=direction*dy/length,direction*-dx/length
             cell=(math.floor((a[0]+b[0])/2+nx/64),math.floor((a[1]+b[1])/2+ny/64))
             if cell in l.cells:options.append((nx,ny,l.cells[cell]))
-        if len(options)!=1 or options[0][2].roof!='F_SKY1':continue
+        if len(options)!=1:continue
+        if not covered and options[0][2].roof!='F_SKY1':continue
+        if covered and options[0][2].ceil<=128:continue
         nx,ny,style=options[0]
         outer=(math.floor((a[0]+b[0])/2-nx/64),math.floor((a[1]+b[1])/2-ny/64))
-        height=160 if texture=='GSCREAM' else 128
+        height=128
         l.cells[outer]=Style('sign backing '+texture,floor=height,ceil=height,
                              roof='GROOF',wall=style.wall,light=style.light)
-    return l
 
 
 def make_music():
@@ -1203,7 +1219,7 @@ def make_music():
 def validate_layout(l):
     # Check placements and broad route connectivity without pretending this is
     # combat playtesting. Runtime movement tests separately verify the route.
-    blocking = {1:16,2:16,3:16,4:16,3004:20,9:20,3001:20,3002:30,2035:10,2028:16}
+    blocking = {1:16,2:16,3:16,4:16,3004:20,9:20,3001:20,3002:30,2035:10,2028:16,35:16}
     for x,y,a,t,f in l.things:
         cell = (x//64,y//64)
         assert cell in l.cells, ('thing outside map',t,x,y)
@@ -1217,7 +1233,7 @@ def validate_layout(l):
                 neighbor = l.cells[c]
                 assert neighbor.floor <= s.floor+24 and neighbor.ceil >= s.floor+56, ('thing overlaps obstacle',t,x,y,neighbor.label)
     # Reachability with all doors open, respecting 24-unit stairs and headroom.
-    start = (5,-6)
+    start=tuple(v//64 for v in l.landmarks['start'])
     seen = {start}
     todo = deque([start])
     while todo:
@@ -1239,7 +1255,9 @@ def validate_layout(l):
         if label in ('power_switch','gate','exit','target'):
             continue
         assert (point[0]//64,point[1]//64) in seen,(label,'unreachable')
-    assert (40,14) in seen, 'exit unreachable'
+    assert tuple(v//64 for v in l.landmarks['exit']) in seen, 'exit unreachable'
+    l.reachable_cells=len(seen)
+    return seen
 
 
 def overview(l):
@@ -1280,6 +1298,7 @@ def overview(l):
             d.rectangle((px-3,py-3,px+3,py+3),fill=GOLD if t != 1 else (115,232,165))
     labels = [(5.5,-7,'ARRIVAL'),(7.5,18.5,'TICKET PLAZA'),(-8,6,'SECURITY'),(-10,30,'STAFF YARD'),
               (7.5,27,'CONTROL'),(9,22.5,'BALCONY'),(28,19.5,'WELCOME COURTYARD'),(39,14,'EXIT')]
+    if l.map_name=='E1M2':labels=[(p[0]/64,p[1]/64,k.replace('_',' ').upper()) for k,p in l.landmarks.items()]
     for x,y,label in labels:
         px,py = pos(x,y)
         f = font(10)
@@ -1288,10 +1307,10 @@ def overview(l):
         d.rectangle((px-tw/2-3,py-7,px+tw/2+3,py+7),fill=INK)
         d.text((px-tw/2,py-6),label,font=f,fill=CREAM)
     d.text((35,24),'GRAVEYARD SHIFT',font=font(25),fill=CREAM)
-    d.text((35,59),'01 / ADMISSION IS MANDATORY',font=font(14),fill=GOLD)
+    d.text((35,59),l.map_name+' / '+l.title.upper(),font=font(14),fill=GOLD)
     d.text((35,h-49),'Green: start   Gold: pickup / secret / shutter   Red: HMP enemy',font=font(11),fill=CREAM)
     d.text((35,h-29),'Classic DOOM format / original map, textures and music',font=font(11),fill=(161,160,163))
-    im.save(HERE/'previews/map-overview.png')
+    im.save(HERE/'previews'/('map-overview.png' if l.map_name=='E1M1' else 'map02-overview.png'))
 
 
 def main():
@@ -1303,36 +1322,48 @@ def main():
     (HERE/'previews').mkdir(parents=True,exist_ok=True)
     base = read_wad(args.iwad)
     art = make_art(args.keep_art)
-    level = make_level()
-    validate_layout(level)
-    lumps = level.build()+art_lumps(art,base)+[('D_E1M1',make_music())]
-    # Remove invisible construction seams before building the final BSP.
-    raw=dict(lumps)
-    sides=list(struct.iter_unpack('<hh8s8s8sH',raw['SIDEDEFS']))
-    kept=[];line_remap={}
-    for old_index,line in enumerate(struct.iter_unpack('<7H',raw['LINEDEFS'])):
-        a,b,flags,special,tag,front,back=line
-        if back!=65535 and sides[front][5]==sides[back][5] and not special and not tag and all(sides[i][4].rstrip(b'\0')==b'-' for i in [front,back]):continue
-        line_remap[old_index]=len(kept)
-        kept.append(struct.pack('<7H',*line))
-    level.manifest['actions']={key:[line_remap[i] for i in value] for key,value in level.manifest['actions'].items()}
-    lumps=[(key,b''.join(kept) if key=='LINEDEFS' else data) for key,data in lumps]
+    from midway import make_level as make_level2
+    levels=[make_level(),make_level2(sys.modules[__name__])]
     builder=shutil.which(args.node_builder)
-    if not builder:
-        raise SystemExit('ZDBSP is required. Install zdbsp or pass --node-builder /path/to/zdbsp')
-    with tempfile.TemporaryDirectory(prefix='graveyard-nodes-') as temp:
-        source=Path(temp)/'source.wad';output=Path(temp)/'finished.wad'
-        write_wad(lumps,source)
-        subprocess.run([builder,'-q','-R','-t','-o',str(output),str(source)],check=True)
-        cooked=read_wad(output)
-        assert not cooked['NODES'].startswith((b'XNOD',b'ZNOD')), 'unexpected extended nodes'
-        (HERE/'graveyard-shift.wad').write_bytes(output.read_bytes())
-        level.manifest.update(nodes=len(cooked['NODES'])//28,subsectors=len(cooked['SSECTORS'])//4,
-                              linedefs=len(cooked['LINEDEFS'])//14,vertices=len(cooked['VERTEXES'])//4)
-
-    (HERE/'map-manifest.json').write_text(json.dumps(level.manifest,indent=2)+'\n')
-    overview(level)
-    print(json.dumps(level.manifest,indent=2))
+    if not builder:raise SystemExit('ZDBSP is required; use --node-builder /path/to/zdbsp')
+    map_lumps=[]
+    baseline=None
+    for level in levels:
+        validate_layout(level)
+        if baseline is None:baseline=level.reachable_cells
+        lumps=level.build()
+        raw=dict(lumps)
+        sides=list(struct.iter_unpack('<hh8s8s8sH',raw['SIDEDEFS']))
+        kept=[];line_remap={}
+        for old_index,line in enumerate(struct.iter_unpack('<7H',raw['LINEDEFS'])):
+            a,b,flags,special,tag,front,back=line
+            if back!=65535 and sides[front][5]==sides[back][5] and not special and not tag and all(sides[i][4].rstrip(b'\0')==b'-' for i in [front,back]):continue
+            line_remap[old_index]=len(kept)
+            kept.append(struct.pack('<7H',*line))
+        level.manifest['actions']={key:[line_remap[i] for i in value] for key,value in level.manifest['actions'].items()}
+        if hasattr(level,'lighting_summary'):level.manifest['lighting']=level.lighting_summary
+        lumps=[(key,b''.join(kept) if key=='LINEDEFS' else data) for key,data in lumps]
+        with tempfile.TemporaryDirectory(prefix='graveyard-nodes-') as temp:
+            source=Path(temp)/'source.wad';output=Path(temp)/'finished.wad'
+            write_wad(lumps,source)
+            subprocess.run([builder,'-q','-R','-t','-o',str(output),str(source)],check=True,stdout=subprocess.DEVNULL)
+            cooked=read_wad(output)
+            assert not cooked['NODES'].startswith((b'XNOD',b'ZNOD'))
+            map_lumps.extend(cooked.items())
+            level.manifest.update(nodes=len(cooked['NODES'])//28,subsectors=len(cooked['SSECTORS'])//4,
+                                  linedefs=len(cooked['LINEDEFS'])//14,vertices=len(cooked['VERTEXES'])//4,
+                                  reachable_grid_cells=level.reachable_cells,
+                                  floor_area_vs_map1=round(level.reachable_cells/baseline,3))
+        filename='map-manifest.json' if level.map_name=='E1M1' else 'map02-manifest.json'
+        (HERE/filename).write_text(json.dumps(level.manifest,indent=2)+'\n')
+        overview(level)
+        print(level.map_name,level.reachable_cells,'reachable cells,',level.manifest['floor_area_vs_map1'],'times Map 1')
+    music=make_music()
+    graphics=art_lumps(art,base)
+    title=Image.new('RGBA',(300,18))
+    centered(ImageDraw.Draw(title),'MIDWAY MASSACRE',1,16,CREAM,300)
+    graphics.append(('WILV01',patch(title,base['PLAYPAL'][:768])))
+    write_wad(map_lumps+graphics+[('D_E1M1',music),('D_E1M2',music)],HERE/'graveyard-shift.wad')
     print(f'Built {HERE / "graveyard-shift.wad"}')
 
 

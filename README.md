@@ -3,15 +3,15 @@
 An original spooky carnival DOOM mapset with cheerful rides, corporate satire,
 and a metal arrangement of a sinister park jingle. Built for [GD-DOOM](https://github.com/Distortions81/GD-DOOM).
 
-**Map 1 — Admission Is Mandatory** is playable: ticket booths, animated fountain
+**Maps 1 and 2 are playable.** Map 1 — Admission Is Mandatory — has ticket booths, animated fountain
 water, a short staff-area loop and a circular carousel with wooden horses and
 monsters. “All screams are considered positive customer feedback.”
 
-![Carousel courtyard](previews/06-welcome-courtyard.png)
+![Map 1: the Grinning Gallop carousel and UAC customer feedback sign](Screenshot.png)
 
 ## Play
 
-The ready-to-load `graveyard-shift.wad` replaces **E1M1**. It targets GD-DOOM
+The ready-to-load `graveyard-shift.wad` includes **E1M1 and E1M2**. It targets GD-DOOM
 with the DOOM shareware IWAD (`DOOM1.WAD`), using classic DOOM formats and actions;
 no Boom features or scripts are required. Supply your own IWAD and engine.
 This repository contains no base-game graphics, sounds, sprites or IWAD.
@@ -33,8 +33,31 @@ Episode 1. Original DOOM restricts add-ons with the shareware IWAD; GD-DOOM
 supports this combination. For other IWADs, rebuild the texture tables with
 `--iwad`. Other engines have not been exhaustively tested.
 
-Only Map 1 is built. Its exit currently continues to the IWAD's E1M2. First-visit
-completion time and combat balance still need human playtesting.
+Map 1 now exits into Map 2. Map 2 currently exits into the IWAD’s E1M3. Maps 3–4
+remain planned. First-visit completion time and combat balance need human playtesting.
+
+## Map 2 — Midway Massacre
+
+The midway adds a shooting gallery with a shootable prize target, rigged booths,
+eight rounded bumper cars and a prize-redemption finale. Two token gates form a
+loop back through the midway. Normal doors keep the opening fight from pulling
+in the entire gallery and service court.
+
+It has **50.5% more reachable floor area** than Map 1, measured on the shared
+64-unit design grid with doors open: 1,838 cells versus 1,221. HMP has **54 enemies**
+and three secrets; Easy has 34 enemies and UV has 60. Size, not enemy density,
+is the primary increase. Bumper cars are detailed static cover, without vehicle controls.
+
+```bash
+./play.sh --iwad /path/to/DOOM1.WAD -map E1M2 -skill=3 -width=1920 -height=1080
+# Recorded HMP run, all kills and secrets:
+./playtests/watch.sh attempt-02-midway --iwad /path/to/DOOM1.WAD
+```
+
+![Collision Department](previews/map02-05-bumper-arena.png)
+
+See [Map 2 design and playtest notes](MAP02.md) for the route, validation and
+lessons carried over from the opener.
 
 ## Explore the files
 
@@ -43,8 +66,10 @@ completion time and combat balance still need human playtesting.
 - `assets/admission-jingle.json`: lyrics, notes, rhythm and chord progression.
 - `assets/admission-waltz.mus`: current metal score; the filename is historical.
 - `previews/`: engine screenshots, map overview, texture atlas and audio previews.
-- `build.py`: deterministic geometry, art, music and classic WAD builder.
-- `map-manifest.json`: enemy counts, actions, secrets and landmarks.
+- `build.py`: shared geometry, art, music and classic WAD builder.
+- `midway.py`: Map 2 geometry, encounters and original midway art.
+- `lighting.py`: Map 1 sprite-light placement, floor-light polygons and moon-shadow brushes.
+- `map-manifest.json` / `map02-manifest.json`: per-map counts, actions, secrets, landmarks and floor-area comparison.
 - `playtests/`: pinned historical WADs, demos, numeric controls and verification results.
 
 The current music is a 26-second loop in 3/4 at 112 BPM. Its distorted lead follows
@@ -53,7 +78,9 @@ drums. The lyrics guide the instrumental melody; there are no embedded vocals.
 `previews/admission-metal.wav` is the current arrangement;
 `previews/admission-jingle.wav` preserves the earlier park-jingle version.
 
-Outdoor skies share a high plane. Signs use ordinary wall faces and texture
+Outdoor skies stay high above the playable spaces. Map 1 adds decorative sprite lights,
+small sector-light pools and architectural moon shadows; see [lighting and surface notes](LIGHTING.md).
+Signs use ordinary wall faces and texture
 offsets, without overlaid sign walls. Chasing lights and rippling water use the
 classic `GSTFONT`, `SLADRIP` and `FWATER` animation ranges at eight tics per frame.
 
@@ -81,7 +108,7 @@ wooden horses and monsters beneath its striped canopy. Its existing route and
 enemy counts stay small; added detail improves composition rather than length.
 
 Each later map introduces a different part of the park and grows in size and
-playtime. These are design targets, not measured times; Maps 2–4 are not built yet.
+playtime. These are design targets, not measured times; Maps 1–2 are built; Maps 3–4 are not built yet.
 
 | Map | Theme and reserved attractions | First-visit target |
 | --- | --- | --- |

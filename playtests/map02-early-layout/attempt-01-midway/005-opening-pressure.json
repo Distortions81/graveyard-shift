@@ -1,0 +1,42 @@
+{
+  "angle": 146.25,
+  "armor": 87,
+  "attempt": "attempt-01-midway",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 74,
+  "kills": 3,
+  "message": "Monster shot you",
+  "remaining": 51,
+  "screenshot": "/home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/map02/attempt-01-midway/005-opening-pressure.png",
+  "seconds": 10.057142857142857,
+  "secrets": 0,
+  "sector": 14,
+  "shells": 21,
+  "tic": 352,
+  "total": 54,
+  "visible": [
+    {
+      "id": 31,
+      "type": 3004,
+      "X": 577.4230804443359,
+      "Y": 312.56346130371094,
+      "HP": 14,
+      "Distance": 52.04316647192995
+    },
+    {
+      "id": 43,
+      "type": 3001,
+      "X": -529.3849029541016,
+      "Y": 1094.3723754882812,
+      "HP": 25,
+      "Distance": 1394.8493549041377
+    }
+  ],
+  "weapon": 3,
+  "x": 629.2142333984375,
+  "y": 317.67889404296875,
+  "z": 0
+}

@@ -1,0 +1,42 @@
+{
+  "angle": 75.9375,
+  "armor": 100,
+  "attempt": "attempt-01-midway",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 100,
+  "kills": 1,
+  "message": "Picked up green armor",
+  "remaining": 53,
+  "screenshot": "/home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/map02/attempt-01-midway/003-checkpoint.png",
+  "seconds": 2.7142857142857144,
+  "secrets": 0,
+  "sector": 18,
+  "shells": 7,
+  "tic": 95,
+  "total": 54,
+  "visible": [
+    {
+      "id": 38,
+      "type": 3001,
+      "X": 1046.3046875,
+      "Y": 918.3046875,
+      "HP": 60,
+      "Distance": 936.0041766372107
+    },
+    {
+      "id": 35,
+      "type": 3001,
+      "X": 416,
+      "Y": 1424,
+      "HP": 60,
+      "Distance": 1200.0166502421762
+    }
+  ],
+  "weapon": 3,
+  "x": 418.5901184082031,
+  "y": 223.98614501953125,
+  "z": 0
+}

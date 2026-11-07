@@ -1,0 +1,261 @@
+{
+  "map": "E1M2",
+  "title": "Midway Massacre",
+  "format": "vanilla Doom",
+  "vertices": 1083,
+  "linedefs": 1098,
+  "sectors": 57,
+  "subsectors": 429,
+  "nodes": 428,
+  "secrets": 3,
+  "actions": {
+    "SW1GARG": [
+      25,
+      29
+    ],
+    "gallery manual door": [
+      77,
+      89,
+      90,
+      105,
+      106,
+      121,
+      122,
+      131,
+      132,
+      133
+    ],
+    "snack door": [
+      140,
+      142,
+      161,
+      162
+    ],
+    "gallery entrance manual door": [
+      224,
+      225,
+      226,
+      227,
+      243,
+      245,
+      246,
+      247,
+      248,
+      249
+    ],
+    "gallery return manual door": [
+      233,
+      234,
+      235,
+      254,
+      256,
+      257,
+      258,
+      259
+    ],
+    "service return manual door": [
+      265,
+      277,
+      278,
+      288,
+      289,
+      297,
+      298,
+      309,
+      311
+    ],
+    "red midway gate": [
+      436,
+      444,
+      445,
+      463,
+      464,
+      478,
+      479,
+      491,
+      493,
+      494,
+      678,
+      691,
+      692,
+      709,
+      710,
+      719,
+      720,
+      729,
+      730,
+      731
+    ],
+    "blue midway gate": [
+      556,
+      557,
+      558,
+      560,
+      588,
+      590,
+      591,
+      592,
+      593,
+      594
+    ],
+    "SW1EXIT": [
+      671,
+      685
+    ],
+    "garden door": [
+      845,
+      846,
+      865,
+      867,
+      868
+    ]
+  },
+  "sector_labels": {
+    "gallery prize cache": 0,
+    "sign backing SW1GARG": 1,
+    "sign backing GDUCK": 2,
+    "target shutter": 3,
+    "sign backing GSHOOT": 4,
+    "skill assessment gallery": 5,
+    "operator office wall": 6,
+    "gallery service court": 7,
+    "service crates": 8,
+    "shooting counter": 9,
+    "gallery manual door": 10,
+    "staff locker secret": 11,
+    "snack door": 12,
+    "gallery aisle lights": 13,
+    "gallery facade": 14,
+    "gallery entrance manual door": 15,
+    "gallery return manual door": 16,
+    "midway promenade": 17,
+    "service return manual door": 18,
+    "rigged prize kiosk": 19,
+    "midway arrival": 20,
+    "sign backing GQUOTA": 21,
+    "promenade light pools": 22,
+    "quota monument": 23,
+    "redemption counter": 24,
+    "prize redemption hall": 25,
+    "prize service counter": 26,
+    "redemption lintel": 27,
+    "red midway gate": 28,
+    "sign backing GPRIZES": 29,
+    "executive prize stand": 30,
+    "arena admission lintel": 31,
+    "arena frontage": 32,
+    "blue midway gate": 33,
+    "collision arena": 34,
+    "arena roof support": 35,
+    "sign backing GREFUND": 36,
+    "arena service return": 37,
+    "return lintel": 38,
+    "return bulkhead": 39,
+    "sign backing SW1EXIT": 40,
+    "prize display plinth": 41,
+    "sign backing GNEXT": 42,
+    "arena step 1": 43,
+    "arena step 2": 44,
+    "arena step 3": 45,
+    "collision control deck": 46,
+    "garden door": 47,
+    "sign backing GBUMP": 48,
+    "credit office secret": 49,
+    "bumper car rubber": 50,
+    "blue bumper car": 51,
+    "bumper seat back": 55,
+    "bumper seat cushion": 56,
+    "red bumper car": 54
+  },
+  "sector_tags": {
+    "10": [],
+    "20": [],
+    "30": [],
+    "40": [
+      3
+    ]
+  },
+  "landmarks": {
+    "start": [
+      544,
+      -352
+    ],
+    "shotgun": [
+      544,
+      224
+    ],
+    "gallery": [
+      -352,
+      1056
+    ],
+    "blue_key": [
+      -800,
+      1824
+    ],
+    "arena": [
+      1760,
+      800
+    ],
+    "red_key": [
+      2848,
+      1120
+    ],
+    "redemption": [
+      1184,
+      1888
+    ],
+    "exit": [
+      1760,
+      2528
+    ]
+  },
+  "animations": {
+    "entrance_marquee": [
+      "GSTFONT1",
+      "GSTFONT2",
+      "GSTFONT3"
+    ],
+    "chasing_trim": [
+      "SLADRIP1",
+      "SLADRIP2",
+      "SLADRIP3"
+    ],
+    "fountain_water": [
+      "FWATER1",
+      "FWATER2",
+      "FWATER3",
+      "FWATER4"
+    ]
+  },
+  "difficulty": {
+    "easy": {
+      "monsters": 34,
+      "types": {
+        "zombieman": 13,
+        "imp": 15,
+        "shotgunner": 5,
+        "pinky": 1
+      }
+    },
+    "hurt_me_plenty": {
+      "monsters": 54,
+      "types": {
+        "zombieman": 24,
+        "imp": 21,
+        "shotgunner": 7,
+        "pinky": 2
+      }
+    },
+    "ultra_violence": {
+      "monsters": 60,
+      "types": {
+        "zombieman": 24,
+        "imp": 24,
+        "shotgunner": 9,
+        "pinky": 3
+      }
+    }
+  },
+  "reachable_grid_cells": 1838,
+  "floor_area_vs_map1": 1.505
+}

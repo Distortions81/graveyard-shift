@@ -1,0 +1,90 @@
+{
+  "angle": 180,
+  "armor": 93,
+  "attempt": "attempt-02-midway",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 86,
+  "kills": 8,
+  "message": "USE: door active",
+  "remaining": 46,
+  "screenshot": "/home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/map02/attempt-02-midway/010-checkpoint.png",
+  "seconds": 23.62857142857143,
+  "secrets": 0,
+  "sector": 17,
+  "shells": 19,
+  "tic": 827,
+  "total": 54,
+  "visible": [
+    {
+      "id": 39,
+      "type": 3004,
+      "X": -224,
+      "Y": 736,
+      "HP": 20,
+      "Distance": 255.04009672338654
+    },
+    {
+      "id": 42,
+      "type": 9,
+      "X": -288,
+      "Y": 1120,
+      "HP": 30,
+      "Distance": 473.04036123627907
+    },
+    {
+      "id": 40,
+      "type": 3001,
+      "X": -480,
+      "Y": 800,
+      "HP": 60,
+      "Distance": 509.8742432261355
+    },
+    {
+      "id": 46,
+      "type": 3004,
+      "X": -544,
+      "Y": 608,
+      "HP": 20,
+      "Distance": 595.0625917044772
+    },
+    {
+      "id": 48,
+      "type": 3004,
+      "X": -480,
+      "Y": 1312,
+      "HP": 20,
+      "Distance": 744.3429318233797
+    },
+    {
+      "id": 43,
+      "type": 3001,
+      "X": -608,
+      "Y": 1184,
+      "HP": 60,
+      "Distance": 760.291533927397
+    },
+    {
+      "id": 47,
+      "type": 3001,
+      "X": -736,
+      "Y": 1056,
+      "HP": 60,
+      "Distance": 817.0532620141263
+    },
+    {
+      "id": 41,
+      "type": 3004,
+      "X": -800,
+      "Y": 864,
+      "HP": 20,
+      "Distance": 834.3666922334264
+    }
+  ],
+  "weapon": 3,
+  "x": 28.919845581054688,
+  "y": 768.8177185058594,
+  "z": 0
+}

@@ -1,0 +1,42 @@
+{
+  "angle": 201.09375,
+  "armor": 50,
+  "attempt": "attempt-01-midway",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": true,
+  "exited": false,
+  "health": 0,
+  "kills": 6,
+  "message": "You Died",
+  "remaining": 48,
+  "screenshot": "/home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/map02/attempt-01-midway/008-gallery-first-pass.png",
+  "seconds": 16.17142857142857,
+  "secrets": 0,
+  "sector": 5,
+  "shells": 15,
+  "tic": 566,
+  "total": 54,
+  "visible": [
+    {
+      "id": 40,
+      "type": 3001,
+      "X": -365.9930114746094,
+      "Y": 649.8301391601562,
+      "HP": 35,
+      "Distance": 65.63391660747395
+    },
+    {
+      "id": 41,
+      "type": 3004,
+      "X": -522.5078125,
+      "Y": 634.5078125,
+      "HP": 20,
+      "Distance": 199.94718762498005
+    }
+  ],
+  "weapon": 3,
+  "x": -336.80096435546875,
+  "y": 708.6147918701172,
+  "z": 0
+}
