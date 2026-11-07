@@ -2,19 +2,29 @@
 from dataclasses import replace
 
 
-def art(api):
+def art(api,base):
     Image,ImageDraw=api.Image,api.ImageDraw
     out={}
     for key,lines,width in [
         ('GSHOOT',['UAC SKILL ASSESSMENT','AIM HIGH. WIN LOW.'],256),
         ('GBUMP',['COLLISION DEPARTMENT','PLEASE BUMP RESPONSIBLY'],256),
-        ('GPRIZES',['PRIZE REDEMPTION','EXPECTATIONS ARE NOT REFUNDABLE'],256),
+        ('GPRIZES',['PRIZE REDEMPTION','EXPECTATIONS ARE','NOT REFUNDABLE'],256),
         ('GQUOTA',["TODAY'S QUOTA",'YESTERDAY + 1'],128),
         ('GREFUND',['CREDIT ISSUED','IN REGRET'],128),
         ('GBPASS',['SKILL PASS','BLUE TOKEN','PLAY TO WORK'],256),
         ('GRPASS',['PRIZE PASS','RED TOKEN','NO CASH VALUE'],256),
         ('GNEXT',['TEAM BUILDING','GHOST TRAIN','NEXT SHIFT'],128)]:
         out[key]=api.sign(lines,(api.INK,api.CREAM),size=(width,128))
+    im=base['GBOOTH'].copy();d=ImageDraw.Draw(im)
+    d.rectangle((0,0,127,23),fill=api.RED)
+    api.centered(d,'PRIZES',5,14,api.CREAM,128,inset=19)
+    d.rectangle((21,36,106,77),fill=(34,26,35))
+    for x in [40,64,88]:
+        d.ellipse((x-7,48,x+7,62),fill=api.CREAM,outline=api.GOLD)
+        d.rectangle((x-5,61,x+5,73),fill=api.RED)
+        d.rectangle((x-4,53,x-2,56),fill=api.INK)
+        d.rectangle((x+2,53,x+4,56),fill=api.INK)
+    out['GPRBOOTH']=im
     for key,color in [('GBCRED',api.RED),('GBCBLUE',api.TEAL)]:
         im=Image.new('RGBA',(128,128),color);d=ImageDraw.Draw(im)
         d.rectangle((0,0,127,3),fill=api.CREAM)
@@ -47,11 +57,11 @@ def art(api):
 def make_level(api):
     S=api.Style
     l=api.Level('E1M2','Midway Massacre')
-    street=S('midway promenade',ceil=320,flat='GPLANK',wall='GFACADE',light=176)
+    street=S('midway promenade',ceil=384,flat='GPLANK',wall='GFACADE',light=176)
     entry=replace(street,label='midway arrival',wall='GBRICK',flat='GASPHALT',light=160)
-    gallery=S('skill assessment gallery',ceil=144,roof='GROOF',flat='GCHECK',wall='GTEAL',light=192)
-    service=S('gallery service court',ceil=320,flat='GASPHALT',wall='GBRICK',light=160)
-    arena=S('collision arena',floor=-16,ceil=192,roof='GELECT',flat='GBFLOOR',wall='GMETAL',light=192)
+    gallery=S('skill assessment gallery',ceil=128,roof='GROOF',flat='GCHECK',wall='GTEAL',light=192)
+    service=S('gallery service court',ceil=384,flat='GASPHALT',wall='GBRICK',light=160)
+    arena=S('collision arena',floor=0,ceil=256,roof='GELECT',flat='GBFLOOR',wall='GMETAL',light=160)
     prize=S('prize redemption hall',ceil=160,roof='GROOF',flat='GVELVET',wall='GWOOD',light=192)
     l.rect(4,-8,14,0,entry)
     l.rect(0,0,20,28,street)
@@ -61,9 +71,9 @@ def make_level(api):
     l.rect(8,28,34,40,prize)
     l.rect(26,22,34,28,replace(service,label='arena service return',wall='GMETAL'))
     # The public sides are visible through admission doors; no route bypasses keys.
-    l.rect(20,0,21,22,replace(arena,label='arena frontage',floor=192))
+    l.rect(20,0,21,22,replace(arena,label='arena frontage',floor=256))
     l.rect(20,8,21,12,S('blue midway gate',ceil=0,roof='GROOF',door=True,wall='GBPASS'))
-    l.rect(8,27,20,28,replace(street,label='redemption counter',floor=144,wall='GBOOTH'))
+    l.rect(8,27,20,28,replace(street,label='redemption counter',floor=128,wall='GPRBOOTH'))
     l.rect(12,27,16,28,S('red midway gate',ceil=0,roof='GROOF',door=True,wall='GRPASS'))
     l.rect(26,24,34,25,replace(service,label='return bulkhead',floor=128,ceil=128,roof='GROOF'))
     l.rect(28,24,32,25,S('red midway gate',ceil=0,roof='GROOF',door=True,wall='GRPASS'))
@@ -71,41 +81,41 @@ def make_level(api):
     for y in [26,28]:l.rect(12,y,16,y+1,replace(prize,label='redemption lintel',ceil=128))
     for y in [23,25]:l.rect(26,y,34,y+1,replace(service,label='return lintel',ceil=128,roof='GROOF'))
     # Broad openings into the gallery, plus a small operator office on its return.
-    l.rect(-1,8,0,24,replace(gallery,label='gallery facade',floor=144))
+    l.rect(-1,8,0,24,replace(gallery,label='gallery facade',floor=128))
     l.rect(-1,10,0,14,S('gallery entrance manual door',ceil=0,roof='GROOF',door=True))
     l.rect(-1,19,0,22,S('gallery return manual door',ceil=0,roof='GROOF',door=True))
     l.rect(-16,24,0,25,replace(service,label='operator office wall',floor=128,ceil=128,roof='GROOF'))
     l.rect(0,28,4,29,S('service return manual door',ceil=0,roof='GROOF',door=True))
     l.rect(-14,24,-10,25,S('gallery manual door',ceil=0,roof='GROOF',door=True))
-    for x in [2,15]:
+    # Two complete 128-unit booth modules per public face; no partial word repeats.
+    for x in [1,14]:
         for y in [5,18]:
-            l.rect(x,y,x+3,y+3,replace(street,label='rigged prize kiosk',floor=112,wall='GBOOTH',flat='GREDTOP'))
+            l.rect(x,y,x+4,y+2,replace(street,label='rigged prize kiosk',floor=128,wall='GPRBOOTH',flat='GREDTOP'))
     l.rect(8,11,12,17,replace(street,label='quota monument',floor=80,wall='GPOLE',flat='GROOF'))
-    for y in [3,10,17,24]:
-        l.rect(6,y,8,y+1,replace(street,label='promenade light pools',light=224))
     # Shooting stalls have low counters, not tiny maze passages.
     for y in [10,15,20]:
         l.rect(-14,y,-11,y+2,replace(gallery,label='shooting counter',floor=48,flat='GPLANK',wall='GSTRIPE'))
-    l.rect(-8,9,-7,23,replace(gallery,label='gallery aisle lights',light=224))
+    for y in [11,17,22]:
+        l.rect(-8,y,-7,y+1,replace(gallery,label='gallery ceiling fixture',roof='GLAMP',light=208))
     for x,y in [(-15,29),(-5,27)]:
         l.rect(x,y,x+2,y+2,replace(service,label='service crates',floor=48,wall='GCRATE',flat='GPLANK'))
     # Eight rounded, rubber-rimmed bumper cars; generous lanes connect both sides.
     for i,(x,y) in enumerate([(25,5),(31,5),(39,5),(25,11),(35,11),(41,12),(28,18),(37,18)]):
         l.round_area(x,y,(x-1,y-1,x+1,y+1),[
             (60,arena),
-            (48,replace(arena,label='bumper car rubber',floor=0,flat='GROOF',wall='GRUBBER',light=208)),
-            (24,replace(arena,label='red bumper car' if i%2 else 'blue bumper car',floor=24,
+            (48,replace(arena,label='bumper car rubber',floor=16,flat='GROOF',wall='GRUBBER',light=208)),
+            (24,replace(arena,label='red bumper car' if i%2 else 'blue bumper car',floor=40,
                          flat='GREDTOP' if i%2 else 'GPLANK',wall='GBCRED' if i%2 else 'GBCBLUE',light=208)),
-            (0,lambda wedge: replace(arena,label='bumper seat back' if wedge<4 else 'bumper seat cushion',floor=40 if wedge<4 else 24,flat='GSEAT',wall='GBCRED' if i%2 else 'GBCBLUE',light=208))],arena,sides=8)
+            (0,lambda wedge: replace(arena,label='bumper seat back' if wedge<4 else 'bumper seat cushion',floor=56 if wedge<4 else 40,flat='GSEAT',wall='GBCRED' if i%2 else 'GBCBLUE',light=208))],arena,sides=8)
     for x,y in [(23,2),(43,2),(23,19),(43,19)]:
-        l.rect(x,y,x+1,y+1,replace(arena,label='arena roof support',floor=192,wall='GPOLE'))
+        l.rect(x,y,x+1,y+1,replace(arena,label='arena roof support',floor=256,wall='GPOLE'))
     # Red token: a small raised control deck with ordinary 16-unit stairs.
     for i in range(3):
-        l.rect(41+i,15,42+i,18,replace(arena,label=f'arena step {i+1}',floor=i*16,wall='GSTEP'))
-    l.rect(44,14,46,20,replace(arena,label='collision control deck',floor=32,flat='GGRATE',wall='GMETAL',light=224))
+        l.rect(41+i,15,42+i,18,replace(arena,label=f'arena step {i+1}',floor=(i+1)*16,wall='GSTEP'))
+    l.rect(44,14,46,20,replace(arena,label='collision control deck',floor=48,flat='GGRATE',wall='GSTEP',light=224))
     # Prize counters, back displays and a central aisle with two flanking routes.
     for x in [10,22]:
-        l.rect(x,32,x+6,34,replace(prize,label='prize service counter',floor=48,flat='GPLANK',wall='GBOOTH'))
+        l.rect(x,32,x+6,34,replace(prize,label='prize service counter',floor=48,flat='GPLANK',wall='GWOOD'))
     l.rect(29,29,33,39,replace(prize,label='prize display plinth',floor=64,flat='GROOF',wall='GSTRIPE'))
     l.rect(16,35,19,38,replace(prize,label='executive prize stand',floor=32,wall='GPOLE',flat='GREDTOP'))
     # Secrets are rewards, not mandatory progression.
@@ -119,7 +129,7 @@ def make_level(api):
     for a,b,tex in [((10,-8),(8,-8),'GQUOTA'),((-16,16),(-16,18),'GDUCK'),
                     ((-12,8),(-16,8),'GSHOOT'),((4,30),(4,28),'GQUOTA'),
                     ((46,11),(46,7),'GBUMP'),((12,40),(16,40),'GPRIZES'),
-                    ((24,40),(26,40),'GREFUND'),((34,38),(34,36),'GNEXT')]:
+                    ((24,40),(26,40),'GREFUND'),((20,40),(22,40),'GNEXT')]:
         l.sign(a,b,tex)
     l.sign((-16,12),(-16,14),'SW1GARG',46,40)
     l.sign((26,40),(28,40),'SW1EXIT',11,0)
@@ -153,5 +163,7 @@ def make_level(api):
     l.landmarks=dict(start=[544,-352],shotgun=[544,224],gallery=[-352,1056],blue_key=[-800,1824],
                      arena=[1760,800],red_key=[2848,1120],redemption=[1184,1888],exit=[1760,2528])
     # Closed sectors behind boundary posters split ONE wall at poster height.
+    from lighting import apply_map2
+    apply_map2(l)
     api.mount_wall_signs(l,covered=True)
     return l

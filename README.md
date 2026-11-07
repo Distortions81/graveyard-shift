@@ -43,8 +43,8 @@ eight rounded bumper cars and a prize-redemption finale. Two token gates form a
 loop back through the midway. Normal doors keep the opening fight from pulling
 in the entire gallery and service court.
 
-It has **50.5% more reachable floor area** than Map 1, measured on the shared
-64-unit design grid with doors open: 1,838 cells versus 1,221. HMP has **54 enemies**
+It has **50.9% more reachable floor area** than Map 1, measured on the shared
+64-unit design grid with doors open: 1,842 cells versus 1,221. HMP has **54 enemies**
 and three secrets; Easy has 34 enemies and UV has 60. Size, not enemy density,
 is the primary increase. Bumper cars are detailed static cover, without vehicle controls.
 
@@ -54,7 +54,11 @@ is the primary increase. Bumper cars are detailed static cover, without vehicle 
 ./playtests/watch.sh attempt-02-midway --iwad /path/to/DOOM1.WAD
 ```
 
-![Collision Department](previews/map02-05-bumper-arena.png)
+![Midway prize booths and decorative lighting](previews/map02-13-midway-light.png)
+
+The latest pass adds small sprite-light pools, outdoor moon shadows and
+texture-sized prize booths. Full-size door posters and signs have been checked
+for clipped words, including the relocated Next Shift sign.
 
 See [Map 2 design and playtest notes](MAP02.md) for the route, validation and
 lessons carried over from the opener.

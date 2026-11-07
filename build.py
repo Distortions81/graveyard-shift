@@ -374,7 +374,7 @@ def make_art(keep=False):
     d.line((31,20,31,44),fill=(89,64,39),width=2)
     art['GLAMP']=im
     from midway import art as midway_art
-    art.update(midway_art(sys.modules[__name__]))
+    art.update(midway_art(sys.modules[__name__],art))
     folder = HERE/'assets/textures'
     folder.mkdir(parents=True, exist_ok=True)
     for key, im in art.items():
@@ -705,6 +705,34 @@ class Level:
             sides.extend([[0,0,'-','-',texture,sec],[0,0,'-','-',texture,sec]])
             li=len(lines);key=frozenset((a,b));edge_index[key]=li
             lines.append([vertex(a),vertex(b),4|16|128|(1 if blocking else 0),0,0,sd,sd+1])
+        # Floor-light subdivisions can split a labeled wall into shorter
+        # edges. Carry its authored texture offsets onto every new segment.
+        for table,is_wall in [(self.wall_overrides,True),(self.edge_overrides,False)]:
+            authored=list(table.items())
+            for key,li in edge_index.items():
+                if key in table:continue
+                p,q=tuple(key)
+                for parent,override in authored:
+                    a,b=tuple(parent);dx,dy=b[0]-a[0],b[1]-a[1];length2=dx*dx+dy*dy
+                    def on_edge(v):
+                        cross=(v[0]-a[0])*dy-(v[1]-a[1])*dx
+                        dot=(v[0]-a[0])*dx+(v[1]-a[1])*dy
+                        return abs(cross)<1e-7 and -1e-8<=dot<=length2+1e-8
+                    if not on_edge(p) or not on_edge(q):continue
+                    line=lines[li];front=sectors[sides[line[5]][5]]
+                    back=sectors[sides[line[6]][5]] if line[6]!=65535 else None
+                    flip=back and ((front.door and not back.door) or (is_wall and front.label.startswith('sign backing ')))
+                    start=vertices[line[1] if flip else line[0]]
+                    end=vertices[line[0] if flip else line[1]]
+                    direction=(end[0]-start[0],end[1]-start[1])
+                    origin=min([a,b],key=lambda v:v[0]*direction[0]+v[1]*direction[1])
+                    advance=round(math.hypot(start[0]-origin[0]*UNIT,start[1]-origin[1]*UNIT))
+                    if is_wall:
+                        tex,offset,special,tag=override
+                        table[key]=(tex,offset+advance,special,tag)
+                    else:
+                        table[key]=dict(override,offset=override.get('offset',0)+advance)
+                    break
         # Apply linedef behavior only after front/back sides exist.
         action_lines = defaultdict(list)
         for key, li in edge_index.items():
@@ -806,7 +834,7 @@ class Level:
         for line in lines:
             a,b = vertices[line[0]],vertices[line[1]]
             for si,p,q in [(line[5],a,b),(line[6],b,a)]:
-                if si==65535 or sides[si][3]!='GBOOTH':continue
+                if si==65535 or sides[si][3] not in {'GBOOTH','GPRBOOTH'}:continue
                 axis=0 if p[1]==q[1] else 1
                 direction=1 if q[axis]>p[axis] else -1
                 booth_faces[(axis,direction,p[1-axis])].append((si,p[axis]*direction,q[axis]*direction))

@@ -77,11 +77,19 @@ def apply_map1(l):
             points=[(round((x+radius*math.cos(-i*math.pi/4))*8)/8,
                      round((y+radius*math.sin(-i*math.pi/4))*8)/8) for i in range(8)]
             brush(points,light)
+    touched=_paint(l,brushes)
+    l.lighting_summary=dict(sprite_lights=6,light_brushes=len(brushes),floor_cells_split=touched,
+                            moonlight_direction='northeast to southwest',
+                            method='classic sector lighting; small sprite-light pools and architectural moon shadows')
+
+
+def _paint(l,brushes,covered=False):
     touched=0
     for (x,y),style in list(l.cells.items()):
-        if (x,y) in l.carved or style.floor!=0 or style.roof!='F_SKY1' or style.door or style.tag or style.special:continue
+        if (x,y) in l.carved or style.floor!=0 or (not covered and style.roof!='F_SKY1') or style.door or style.tag or style.special:continue
         pieces=[([tuple(Fraction(v) for v in p) for p in [(x,y),(x,y+1),(x+1,y+1),(x+1,y)]],style.light)]
         for polygon,light,shadow,box in brushes:
+            if shadow and style.roof!='F_SKY1':continue
             if box[2]<=x or box[0]>=x+1 or box[3]<=y or box[1]>=y+1:continue
             next_pieces=[]
             for piece,old in pieces:
@@ -92,6 +100,46 @@ def apply_map1(l):
         if all(light==style.light for poly,light in pieces):continue
         l.carved.add((x,y));touched+=1
         l.extra_polygons.extend(([tuple(float(v) for v in p) for p in poly],replace(style,light=light)) for poly,light in pieces)
-    l.lighting_summary=dict(sprite_lights=6,light_brushes=len(brushes),floor_cells_split=touched,
+    return touched
+
+
+def apply_map2(l):
+    # Small stock sprite lights, placed away from the established route and
+    # shooting lanes. Covered rooms receive local light, never moon shadows.
+    sources=[(1,8.5,35),(18.5,8,35),(1,22.5,35),(18.5,22.5,35),
+             (-15,31.5,2028),(-1,32.5,2028),
+             (21.75,3.5,2028),(44.25,3.5,2028),(34.5,20,2028),
+             (-15,9,35),(-14.5,22.5,35),(9,34.5,35),(28.25,37.5,35)]
+    for x,y,kind in sources:l.thing(x,y,kind)
+    brushes=[]
+    def brush(points,light,shadow=False):
+        p=[tuple(Fraction(v) for v in point) for point in points]
+        if _area(p)>0:p.reverse()
+        brushes.append((p,light,shadow,(min(x for x,y in p),min(y for x,y in p),max(x for x,y in p),max(y for x,y in p))))
+    def hull(points):
+        def cross(o,a,b):return (a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0])
+        points=sorted(set(points));lower=[];upper=[]
+        for p in points:
+            while len(lower)>=2 and cross(lower[-2],lower[-1],p)<=0:lower.pop()
+            lower.append(p)
+        for p in reversed(points):
+            while len(upper)>=2 and cross(upper[-2],upper[-1],p)<=0:upper.pop()
+            upper.append(p)
+        return lower[:-1]+upper[:-1]
+    for x,y,w,h in [(1,5,4,2),(14,5,4,2),(1,18,4,2),(14,18,4,2),
+                     (8,11,4,6),(-15,29,2,2),(-5,27,2,2)]:
+        footprint=[(x,y),(x+w,y),(x+w,y+h),(x,y+h)]
+        for dx,dy,light in [(-3.5,-2,144),(-3,-2,128)]:
+            brush(hull(footprint+[(a+dx,b+dy) for a,b in footprint]),light,True)
+    brush([(8,28),(20,28),(17,26),(5,26)],144,True)
+    for x,y,kind in sources:
+        sector=l.cells[math.floor(x),math.floor(y)]
+        covered=sector.roof!='F_SKY1'
+        for radius,light in [(1 if covered else 1.25,192 if kind==35 else 208),(.5 if covered else .625,224)]:
+            points=[(round((x+radius*math.cos(-i*math.pi/4))*8)/8,
+                     round((y+radius*math.sin(-i*math.pi/4))*8)/8) for i in range(8)]
+            brush(points,light)
+    touched=_paint(l,brushes,covered=True)
+    l.lighting_summary=dict(sprite_lights=len(sources),light_brushes=len(brushes),floor_cells_split=touched,
                             moonlight_direction='northeast to southwest',
-                            method='classic sector lighting; small sprite-light pools and architectural moon shadows')
+                            method='classic sector lighting; small sprite-light pools, ceiling fixtures and outdoor moon shadows')

@@ -16,3 +16,8 @@ playback was independently checked against the recorder’s final position,
 inventory and exit status. Chocolate Doom also rendered the complete demo and
 reported 54/54 kills and 3/3 secrets; results are in `verification/`. Checkpoints 101–102 show the cleared bumper arena.
 The earlier failed layout is preserved separately under `../map02-early-layout/`.
+
+
+This recording predates the sprite-light, moon-shadow, framed-panel and sign polish
+pass. Its pinned WAD preserves that earlier layout. Current preview images and the
+main WAD show the updated map; do not substitute that WAD when replaying the demo.

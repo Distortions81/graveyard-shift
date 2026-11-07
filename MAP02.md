@@ -8,8 +8,8 @@ Map 1. The same lyric-led metal park theme currently plays on both maps.
 
 | Measure | Map 1 | Map 2 |
 | --- | ---: | ---: |
-| Reachable 64-unit grid cells, doors open | 1,221 | 1,838 |
-| Relative floor area | 100% | 150.5% |
+| Reachable 64-unit grid cells, doors open | 1,221 | 1,842 |
+| Relative floor area | 100% | 150.9% |
 | HMP enemies | 36 | 54 |
 | Easy / UV enemies | 20 / 52 | 34 / 60 |
 | Secrets | 3 | 3 |
@@ -34,9 +34,19 @@ than a large closet ambush. Optional secrets offer a chaingun, armor and supplie
 
 ## Detail and lessons from Map 1
 
-- Outdoor skies use a consistent 320-unit plane. Low ceilings belong to covered rooms.
+- Outdoor skies use a consistent 384-unit plane. The shooting gallery uses a
+  complete 128-unit wall height, and the arena uses a complete 256-unit height.
+  Low ceilings belong to covered rooms.
 - Signs use existing wall faces and normal texture offsets; no inset sign overlays.
-- Counters, siding and door lettering align across wall segments.
+- Framed panels, siding and door lettering align across wall segments. Prize booths
+  use full 128-unit modules and complete PRIZES labels, with skull dolls in the windows.
+  The shorter redemption counters use plain wood rather than cropped booth artwork.
+- Eight candelabra and five tech-lamp sprites produce small local pools of light.
+  Booths, the quota monument and service crates cast consistent southwest-facing
+  moon shadows outdoors. Covered rooms get local fixtures and pools without moon shadows.
+- The raised display no longer obscures the Next Shift sign. Redemption text is
+  split into three readable lines. The builder carries authored offsets onto wall
+  pieces introduced by lighting subdivisions, preserving complete sign lettering.
 - Rounded cars have rubber rings, colored bodies and seat backs. Broad lanes
   leave maneuvering room; floor lamps do not block circulation.
 - Gallery ducks, electrical ceiling grids, quota notices and prize-policy signs
@@ -53,13 +63,19 @@ the correct token, and the final switch activates. The WAD audit reports no
 unknown actions or invalid thing flags. Five fixed-camera render checks also
 pass in Chocolate Doom. Map 1’s route, encounters and pickups remain unchanged.
 
-`playtests/map02/attempt-02-midway` records a completed HMP run: **54/54 kills,
+`playtests/map02/attempt-02-midway` records a completed HMP run of the earlier layout: **54/54 kills,
 3/3 secrets**, 88 health and 184 armor. It includes a return through both token
 loops and a cleared-map bumper-car tour. All enemies were defeated at 3:15.49;
 the run exits at 4:26.89 including exploration, stalled waypoints and the tour.
 Normal GD-DOOM demo playback reproduces its final state exactly. The complete
 rendered demo also passed in Chocolate Doom, independently reporting 54/54 kills
 and 3/3 secrets. Verification results are retained beside the recording.
+
+The current polish pass is separately verified by route/lock checks on all three
+skills and fresh renderer checks. The earlier demo keeps its matching pinned WAD;
+its 54/54 result does not substitute for human combat testing of the latest revision.
+Sign-audit previews 08–12 and lighting previews 13–14 show the updated artwork;
+monsters are hidden in these inspection captures so they do not obscure the text.
 
 The failed first attempt, before the encounter-door revision, is preserved in
 `playtests/map02-early-layout/` with its matching earlier WAD. Do not substitute
