@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+DOOM*.WAD
+doom*.wad
+DOOM*.wad
+config.toml
+saves/
