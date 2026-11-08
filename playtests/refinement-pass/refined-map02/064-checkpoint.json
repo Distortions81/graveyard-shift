@@ -1,0 +1,33 @@
+{
+  "angle": 75.9375,
+  "armor": 32,
+  "attempt": "refined-map02",
+  "blue_key": true,
+  "bullets": 12,
+  "dead": false,
+  "exited": false,
+  "health": 89,
+  "kills": 49,
+  "message": "Picked up a clip",
+  "remaining": 5,
+  "seconds": 132.6,
+  "secrets": 0,
+  "sector": 29,
+  "shells": 48,
+  "tic": 4641,
+  "total": 54,
+  "visible": [
+    {
+      "id": 79,
+      "type": 3002,
+      "X": 1354.571517944336,
+      "Y": 2008.8089447021484,
+      "HP": 29,
+      "Distance": 127.38541445486308
+    }
+  ],
+  "weapon": 3,
+  "x": 1314.1883392333984,
+  "y": 1887.9940338134766,
+  "z": 0
+}

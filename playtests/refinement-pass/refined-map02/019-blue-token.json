@@ -1,0 +1,50 @@
+{
+  "angle": 334.6875,
+  "armor": 60,
+  "attempt": "refined-map02",
+  "blue_key": true,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 70,
+  "kills": 21,
+  "message": "Picked up a blue keycard.",
+  "remaining": 33,
+  "seconds": 46.51428571428571,
+  "secrets": 0,
+  "sector": 4,
+  "shells": 9,
+  "tic": 1628,
+  "total": 54,
+  "visible": [
+    {
+      "id": 56,
+      "type": 3004,
+      "X": -473.373046875,
+      "Y": 1666.423828125,
+      "HP": 20,
+      "Distance": 361.67122758397164
+    },
+    {
+      "id": 54,
+      "type": 3001,
+      "X": -159.1103515625,
+      "Y": 1888.8896484375,
+      "HP": 60,
+      "Distance": 644.4182986011607
+    },
+    {
+      "id": 58,
+      "type": 3004,
+      "X": -153.373046875,
+      "Y": 1666.423828125,
+      "HP": 20,
+      "Distance": 665.0245918170787
+    }
+  ],
+  "weapon": 3,
+  "x": -800.0162200927734,
+  "y": 1821.6987915039062,
+  "z": 0,
+  "screenshot": "019-blue-token.png"
+}

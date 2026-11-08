@@ -43,8 +43,8 @@ eight rounded bumper cars and a prize-redemption finale. Two token gates form a
 loop back through the midway. Normal doors keep the opening fight from pulling
 in the entire gallery and service court.
 
-It has **50.9% more reachable floor area** than Map 1, measured on the shared
-64-unit design grid with doors open: 1,842 cells versus 1,221. HMP has **54 enemies**
+It has **51.1% more reachable floor area** than Map 1, measured on the shared
+64-unit design grid with doors open: 1,842 cells versus 1,219. HMP has **54 enemies**
 and three secrets; Easy has 34 enemies and UV has 60. Size, not enemy density,
 is the primary increase. Bumper cars are detailed static cover, without vehicle controls.
 
@@ -56,9 +56,11 @@ is the primary increase. Bumper cars are detailed static cover, without vehicle 
 
 ![Midway prize booths and decorative lighting](previews/map02-13-midway-light.png)
 
-The latest pass adds small sprite-light pools, outdoor moon shadows and
-texture-sized prize booths. Full-size door posters and signs have been checked
-for clipped words, including the relocated Next Shift sign.
+The latest pass refines both maps: Map 1 has clearer security-room guidance,
+complete ticket-booth panels and a more staged service-yard fight. Map 2 adds a
+main-route chaingun, earlier recovery supplies, less gallery pressure, deliberate
+arena ceiling lamps and a carpet aisle through redemption. The exit sign now
+points toward the ghost train. See [the refinement playtests](playtests/refinement-pass/README.md).
 
 See [Map 2 design and playtest notes](MAP02.md) for the route, validation and
 lessons carried over from the opener.
@@ -71,8 +73,9 @@ lessons carried over from the opener.
 - `assets/admission-waltz.mus`: current metal score; the filename is historical.
 - `previews/`: engine screenshots, map overview, texture atlas and audio previews.
 - `build.py`: shared geometry, art, music and classic WAD builder.
+- `geometry.py`: conservative solid-wall merging and unused-record cleanup.
 - `midway.py`: Map 2 geometry, encounters and original midway art.
-- `lighting.py`: Map 1 sprite-light placement, floor-light polygons and moon-shadow brushes.
+- `lighting.py`: Both maps’ sprite-light placement, floor-light polygons and moon-shadow brushes.
 - `map-manifest.json` / `map02-manifest.json`: per-map counts, actions, secrets, landmarks and floor-area comparison.
 - `playtests/`: pinned historical WADs, demos, numeric controls and verification results.
 

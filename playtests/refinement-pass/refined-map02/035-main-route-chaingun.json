@@ -1,0 +1,58 @@
+{
+  "angle": 74.53125,
+  "armor": 49,
+  "attempt": "refined-map02",
+  "blue_key": true,
+  "bullets": 80,
+  "dead": false,
+  "exited": false,
+  "health": 73,
+  "kills": 30,
+  "message": "Picked up a chaingun",
+  "remaining": 24,
+  "seconds": 76.48571428571428,
+  "secrets": 0,
+  "sector": 34,
+  "shells": 39,
+  "tic": 2677,
+  "total": 54,
+  "visible": [
+    {
+      "id": 69,
+      "type": 3001,
+      "X": 1568.8896484375,
+      "Y": 1248.8896484375,
+      "HP": 60,
+      "Distance": 531.1597842542955
+    },
+    {
+      "id": 73,
+      "type": 3004,
+      "X": 1685.4150390625,
+      "Y": 1421.4150390625,
+      "HP": 20,
+      "Distance": 730.2888165927435
+    },
+    {
+      "id": 72,
+      "type": 3001,
+      "X": 2357.1767578125,
+      "Y": 725.1767578125,
+      "HP": 60,
+      "Distance": 917.2885081219649
+    },
+    {
+      "id": 71,
+      "type": 3004,
+      "X": 2333.8212890625,
+      "Y": 989.8212890625,
+      "HP": 20,
+      "Distance": 929.8839441443973
+    }
+  ],
+  "weapon": 3,
+  "x": 1439.9271392822266,
+  "y": 733.6233215332031,
+  "z": 0,
+  "screenshot": "035-main-route-chaingun.png"
+}

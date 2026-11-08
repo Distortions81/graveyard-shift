@@ -1,0 +1,41 @@
+{
+  "angle": 0,
+  "armor": 68,
+  "attempt": "refined-map01",
+  "blue_key": false,
+  "bullets": 120,
+  "dead": false,
+  "exited": false,
+  "health": 58,
+  "kills": 10,
+  "message": "Monster hit you",
+  "remaining": 26,
+  "seconds": 36.77142857142857,
+  "secrets": 1,
+  "sector": 4,
+  "shells": 38,
+  "tic": 1287,
+  "total": 36,
+  "visible": [
+    {
+      "id": 60,
+      "type": 3001,
+      "X": -1042.1157531738281,
+      "Y": 1573.4519653320312,
+      "HP": 27,
+      "Distance": 36.41087233731714
+    },
+    {
+      "id": 50,
+      "type": 3001,
+      "X": -931.29296875,
+      "Y": 1427.390625,
+      "HP": 60,
+      "Distance": 203.29289109991996
+    }
+  ],
+  "weapon": 5,
+  "x": -1078.1161193847656,
+  "y": 1567.9998779296875,
+  "z": 0
+}

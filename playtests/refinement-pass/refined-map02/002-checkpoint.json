@@ -1,0 +1,57 @@
+{
+  "angle": 91.40625,
+  "armor": 0,
+  "attempt": "refined-map02",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 100,
+  "kills": 0,
+  "message": "Picked up a shotgun",
+  "remaining": 54,
+  "seconds": 1.9428571428571428,
+  "secrets": 0,
+  "sector": 14,
+  "shells": 8,
+  "tic": 68,
+  "total": 54,
+  "visible": [
+    {
+      "id": 35,
+      "type": 3001,
+      "X": 288,
+      "Y": 800,
+      "HP": 60,
+      "Distance": 632.3946576478293
+    },
+    {
+      "id": 36,
+      "type": 3004,
+      "X": 830.4658203125,
+      "Y": 830.4658203125,
+      "HP": 20,
+      "Distance": 672.7579416306824
+    },
+    {
+      "id": 40,
+      "type": 3001,
+      "X": 1086.4658203125,
+      "Y": 958.4658203125,
+      "HP": 60,
+      "Distance": 914.8896097492596
+    },
+    {
+      "id": 37,
+      "type": 3001,
+      "X": 416,
+      "Y": 1440,
+      "HP": 60,
+      "Distance": 1224.96520003744
+    }
+  ],
+  "weapon": 2,
+  "x": 544.0081329345703,
+  "y": 221.74154663085938,
+  "z": 0
+}

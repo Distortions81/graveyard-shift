@@ -8,8 +8,8 @@ Map 1. The same lyric-led metal park theme currently plays on both maps.
 
 | Measure | Map 1 | Map 2 |
 | --- | ---: | ---: |
-| Reachable 64-unit grid cells, doors open | 1,221 | 1,842 |
-| Relative floor area | 100% | 150.9% |
+| Reachable 64-unit grid cells, doors open | 1,219 | 1,842 |
+| Relative floor area | 100% | 151.1% |
 | HMP enemies | 36 | 54 |
 | Easy / UV enemies | 20 / 52 | 34 / 60 |
 | Secrets | 3 | 3 |
@@ -23,14 +23,15 @@ subject to human playtesting. Numeric-assisted recordings are not human timing e
 
 1. Collect the visible shotgun, armor and shells on the promenade.
 2. Open a gallery entrance; shooting the bullseye opens an optional prize cache.
-3. Cross the operator court, collect the blue skill token, and return to the midway.
-4. Open blue admission and cross the Collision Department, using cars as cover.
+3. Cross the operator court, collect the blue skill token and recovery kit, and return to the midway.
+4. Open blue admission, collect the chaingun, and cross the Collision Department using cars as cover.
 5. Climb the ordinary 16-unit steps to the red token on the control deck.
 6. Enter prize redemption through either red gate. Clear the counters and exit
    toward the future ghost-train map. The front gate also opens a return loop.
 
 The finale is a larger room with flanking aisles, counters and displays rather
-than a large closet ambush. Optional secrets offer a chaingun, armor and supplies.
+than a large closet ambush. The arena entrance offers a chaingun, with a bullet box farther along the west
+aisle. Optional secrets offer a backpack, armor and supplies.
 
 ## Detail and lessons from Map 1
 
@@ -61,7 +62,7 @@ GD-DOOM progression tests walk the actual route on skills 1, 3 and 4 with collis
 steps, pickups, use traces and no monsters. Both gates reject the player without
 the correct token, and the final switch activates. The WAD audit reports no
 unknown actions or invalid thing flags. Five fixed-camera render checks also
-pass in Chocolate Doom. Map 1’s route, encounters and pickups remain unchanged.
+pass in Chocolate Doom. The latest pass also refines Map 1’s opening encounter and security supplies.
 
 `playtests/map02/attempt-02-midway` records a completed HMP run of the earlier layout: **54/54 kills,
 3/3 secrets**, 88 health and 184 armor. It includes a return through both token
@@ -80,6 +81,18 @@ monsters are hidden in these inspection captures so they do not obscure the text
 The failed first attempt, before the encounter-door revision, is preserved in
 `playtests/map02-early-layout/` with its matching earlier WAD. Do not substitute
 the current WAD when replaying that attempt.
+
+## Second refinement pass
+
+Two gallery hitscanners now guard redemption; a gallery-entry medikit and an
+operator-court kit provide recovery before the arena. The main-route chaingun
+and bullet box add a weapon choice without requiring secrets. The gallery
+secret now rewards a backpack. Enemy totals and all key locks stay the same.
+
+Four ceiling lamps punctuate the arena’s dark electrical grid. Car bodies use
+more restrained sector lighting. The prize hall has timber side aisles and a
+patterned carpet runner, plus counter fixtures. Its dedicated exit poster points
+toward the ghost train. See [current recorded checks](playtests/refinement-pass/README.md).
 
 ## Play
 

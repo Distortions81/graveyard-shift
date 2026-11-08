@@ -1,0 +1,33 @@
+{
+  "angle": 77.34375,
+  "armor": 83,
+  "attempt": "refined-map02",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 66,
+  "kills": 6,
+  "message": "Fireball hit",
+  "remaining": 48,
+  "seconds": 14.857142857142858,
+  "secrets": 0,
+  "sector": 57,
+  "shells": 20,
+  "tic": 520,
+  "total": 54,
+  "visible": [
+    {
+      "id": 39,
+      "type": 3004,
+      "X": 484.9248046875,
+      "Y": 1098.4306640625,
+      "HP": 20,
+      "Distance": 465.35633192247747
+    }
+  ],
+  "weapon": 3,
+  "x": 416.9671325683594,
+  "y": 638.0631256103516,
+  "z": 0
+}

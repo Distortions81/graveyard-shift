@@ -148,6 +148,7 @@ def make_art(keep=False):
     art['GSICK'] = sign(['POSSESSION', 'IS NOT', 'SICK LEAVE'])
     art['GSNACK'] = sign(['EMPLOYEE', 'BENEFITS', 'TRY THE WALL'])
     art['GPRIZE'] = sign(['GRAND PRIZE', 'ARMOR!', 'NO REFUNDS'], (RED, CREAM))
+    art['GSECDIR'] = sign(['SECURITY', 'SHOTGUNS', 'ON LOAN'], (TEAL, CREAM))
     art['GSECURE'] = sign(['SECURITY', 'TAKE ONE', 'SHOTGUN'], (TEAL, CREAM))
     art['GOPEN'] = sign(['WELCOME', 'WE ARE', 'STILL OPEN'], (RED, CREAM))
     art['GTARGET'] = sign(['SHOOT TO WIN', '', 'ONE SHOT!'], (INK, GOLD))
@@ -932,7 +933,7 @@ def make_level():
     l = Level()
     plaza = Style('ticket plaza',ceil=176,light=160)
     arrival = Style('arrival', ceil=128, flat='GASPHALT', wall='GBRICK', light=160)
-    office = Style('security office', ceil=128, roof='GROOF', flat='GCHECK', wall='GTEAL', light=160)
+    office = Style('security office', ceil=128, roof='GROOF', flat='GCHECK', wall='GTEAL', light=144)
     hall = Style('staff corridor', ceil=128, roof='GROOF', flat='GGRATE', wall='GMETAL', light=128)
     yard = Style('service yard', ceil=128, flat='GASPHALT', wall='GBRICK', light=160)
     control = Style('control booth', floor=128, ceil=256, roof='GROOF', flat='GGRATE', wall='GTEAL', light=192)
@@ -956,8 +957,8 @@ def make_level():
     l.rect(4,25,11,31,control)
     l.rect(7,24,10,25,replace(control,label='power shutter',ceil=128,door=True,tag=20))
     l.rect(4,21,14,24,balcony)
-    # Guardrails are small raised sections, leaving a generous 192-unit drop.
-    for x0,x1 in [(4,7),(11,14)]:
+    # Guardrails frame a clear 128-unit drop and screen oblique plaza views.
+    for x0,x1 in [(4,9),(11,14)]:
         l.rect(x0,21,x1,22,replace(balcony,label='balcony rail',floor=160,flat='GROOF'))
     # Fountain: climbable rim, harmless shallow water and a central plinth.
     l.rect(5,10,11,15,replace(plaza,label='fountain rim',floor=16,flat='GROOF',wall='GTEAL'))
@@ -965,7 +966,7 @@ def make_level():
     l.rect(7,12,9,13,replace(plaza,label='fountain plinth',floor=80,flat='GROOF',wall='GTEAL'))
     # Ticket kiosks form cover and carnival silhouettes at different heights.
     for x,y in [(0,5),(13,5),(0,16),(14,16)]:
-        l.rect(x,y,x+2,y+2,replace(plaza,label='ticket kiosk',floor=112,flat='GREDTOP',wall='GBOOTH'))
+        l.rect(x,y,x+2,y+2,replace(plaza,label='ticket kiosk',floor=128,flat='GREDTOP',wall='GBOOTH'))
     # Blue admission gate, courtyard carousel, flanking closets and final exit.
     l.rect(17,10,18,14,Style('admission lintel',ceil=128,roof='GROOF',wall='GTEAL'))
     l.rect(18,10,19,14,Style('admission gate',ceil=0,roof='GROOF',wall='GBLUE',door=True,tag=10))
@@ -1020,12 +1021,16 @@ def make_level():
     # Lower, framed facades keep the tall marquee and canopy visually dominant.
     for (x,y),style in list(l.cells.items()):
         if style==plaza and any((x+dx,y+dy) not in l.cells for dx,dy in [(1,0),(-1,0),(0,1),(0,-1)]):
-            l.cells[x,y]=replace(plaza,label='park facade',ceil=176,wall='GWOOD' if (x+y)%5==0 else 'GFACADE',flat='GPLANK',light=144)
+            l.cells[x,y]=replace(plaza,label='park facade',ceil=176,wall='GWOOD' if (x+y)%5==0 else 'GFACADE',flat='GPAVING',light=144)
         if style==final and any((x+dx,y+dy) not in l.cells for dx,dy in [(1,0),(-1,0),(0,1),(0,-1)]):
             l.cells[x,y]=replace(final,label='courtyard facade',ceil=160,wall='GWOOD' if (x+y)%5==0 else 'GFACADE',light=144)
     # Kiosk roof edges are part of the booth itself; no detached fringe panels.
     for y in [14,17]:
         l.rect(-11,y,-8,y+1,replace(hall,label='staff ceiling light',roof='GLAMP',light=192))
+    # Light the security kit and the staff-loop entrance with real ceiling panels.
+    for x,y in [(-9,8),(-10,12)]:
+        l.rect(x-1,y-1,x+2,y+1,replace(office,label='security fixture falloff',light=176))
+        l.rect(x,y,x+1,y+1,replace(office,label='security ceiling fixture',roof='GLAMP',light=208))
     l.rect(-16,21,-15,22,replace(yard,label='stacked crate',floor=48,wall='GCRATE',flat='GPLANK'))
     l.rect(-15,21,-14,22,replace(yard,label='low crate',floor=24,wall='GCRATE',flat='GPLANK'))
     # A slim round finial replaces the fountain's broad gray block.
@@ -1034,7 +1039,7 @@ def make_level():
     l.round_area(8,12.5,(7,11,9,14),[(40,water),
         (24,replace(plaza,label='fountain bronze base',floor=16,flat='GROOF',wall='GPOLE',light=192)),
         (0,replace(plaza,label='fountain finial',floor=88,flat='GROOF',wall='GPOLE',light=192))],water,sides=12)
-    l.sign((-2,12),(-2,14),'GWINDOW')
+    l.sign((-2,12),(-2,14),'GSECDIR')
     l.sign((18,18),(18,16),'GWINDOW')
     l.sign((28,21),(30,21),'GRIDE')
     l.sign((31,21),(35,21),'GSCREAM')
@@ -1061,7 +1066,7 @@ def make_level():
         l.thing(x,y,11,angle=a)
     # Guaranteed main-route kit, generous enough to play without secrets.
     pickups = [(7.5,4.5,2007),(-8.5,8.5,2001),(-8.5,10.5,2049),(-6.5,6.5,2018),
-               (-10.5,11.5,2011),(-9.5,16.5,2008),(-15.5,19.5,2008),(-15.5,28.5,2049),
+               (-10.5,11.5,2012),(-9.5,16.5,2008),(-15.5,19.5,2008),(-15.5,28.5,2049),
                (-5.5,28.5,2011),(5.5,27.5,2011),(8.5,29.5,5),(9.5,26.5,2008),
                (11.5,22.5,2008),(15.5,11.5,2012),(15.5,12.5,2049),(22.5,8.5,2008),
                (22.5,17.5,2011),(34.5,8.5,2049),(35.5,17.5,2012),(39.5,13.5,2008)]
@@ -1082,8 +1087,8 @@ def make_level():
         [(3.5,7.5,3004,7),(11.5,8.5,3004,6),(2.5,13.5,3001,7),(15.5,14.5,3001,7),
          (3.5,18.5,3004,6),(12.5,18.5,3001,6),(16.5,7.5,3004,4),(1.0,17.0,3001,4),(15.0,17.0,3001,4)],
         [(-10.5,7.5,3004,7),(-5.5,11.5,3001,7),(-5.5,7.5,9,6),(-11.5,11.5,3004,4)],
-        [(-9.5,15.5,3001,7),(-14.5,21.5,3004,7),(-15.5,25.5,3001,7),(-9.5,28.5,3002,7),
-         (-5.5,30.0,3001,6),(-9.5,23.5,9,6),(-15.5,29.5,3004,6),(-4.5,23.5,3004,4),
+        [(-9.5,15.5,3001,7),(-14.5,21.5,3004,7),(-15.5,25.5,3001,7),(-13.5,28.5,3002,7),
+         (-5.5,30.0,3001,6),(-12.5,26.5,9,6),(-15.5,29.5,3004,6),(-4.5,23.5,3004,4),
          (-12.5,27.5,3001,4),(-16.0,22.5,9,4)],
         [(-5.5,20.5,3001,7),(-4.5,19.5,3004,6),(-4.5,21.0,9,4)],
         [(5.5,29.5,3001,7),(9.5,30.0,3004,6),(5.5,25.5,9,4)],
@@ -1096,7 +1101,9 @@ def make_level():
     ]
     for gi, group in enumerate(groups):
         for x,y,t,f in group:
-            l.thing(x,y,t,f | (8 if gi in (2,4,5,7,8,9) else 0),angle=270 if y>20 else 180)
+            l.thing(x,y,t,f | (8 if gi in (2,3,4,5,7,8,9) else 0),angle=270 if y>20 else 180)
+    # Yard guards wait behind machinery; distant sound alone cannot turn the
+    # security-room introduction into the entire service-court fight.
     # Barrels sit clear of the route and offer optional combat shortcuts.
     for x,y in [(-15.5,23.5),(-9.5,25.5),(23.5,23.0),(33.0,1.5)]:
         l.thing(x,y,2035)
@@ -1371,6 +1378,11 @@ def main():
         level.manifest['actions']={key:[line_remap[i] for i in value] for key,value in level.manifest['actions'].items()}
         if hasattr(level,'lighting_summary'):level.manifest['lighting']=level.lighting_summary
         lumps=[(key,b''.join(kept) if key=='LINEDEFS' else data) for key,data in lumps]
+        from geometry import optimize
+        lumps, optimized_lines, savings = optimize(lumps, {key: im.width for key, im in art.items()})
+        level.manifest['actions'] = {key: [optimized_lines[i] for i in value]
+                                     for key, value in level.manifest['actions'].items()}
+        level.manifest['geometry_optimization'] = savings
         with tempfile.TemporaryDirectory(prefix='graveyard-nodes-') as temp:
             source=Path(temp)/'source.wad';output=Path(temp)/'finished.wad'
             write_wad(lumps,source)

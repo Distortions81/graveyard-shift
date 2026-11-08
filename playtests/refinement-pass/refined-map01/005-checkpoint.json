@@ -1,0 +1,49 @@
+{
+  "angle": 180,
+  "armor": 0,
+  "attempt": "refined-map01",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 97,
+  "kills": 0,
+  "message": "Monster shot you",
+  "remaining": 36,
+  "seconds": 7,
+  "secrets": 0,
+  "sector": 21,
+  "shells": 0,
+  "tic": 245,
+  "total": 36,
+  "visible": [
+    {
+      "id": 56,
+      "type": 9,
+      "X": -352,
+      "Y": 480,
+      "HP": 30,
+      "Distance": 267.6382209072226
+    },
+    {
+      "id": 55,
+      "type": 3001,
+      "X": -352,
+      "Y": 736,
+      "HP": 60,
+      "Distance": 296.3912217878311
+    },
+    {
+      "id": 54,
+      "type": 3004,
+      "X": -672,
+      "Y": 480,
+      "HP": 20,
+      "Distance": 577.7891190724417
+    }
+  ],
+  "weapon": 2,
+  "x": -102.29679870605469,
+  "y": 576.3251190185547,
+  "z": 0
+}

@@ -1,0 +1,42 @@
+{
+  "angle": 5.625,
+  "armor": 60,
+  "attempt": "refined-map02",
+  "blue_key": true,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 95,
+  "kills": 22,
+  "message": "Picked up a medikit.",
+  "remaining": 32,
+  "seconds": 47.02857142857143,
+  "secrets": 0,
+  "sector": 4,
+  "shells": 8,
+  "tic": 1646,
+  "total": 54,
+  "visible": [
+    {
+      "id": 54,
+      "type": 3001,
+      "X": -202.5849609375,
+      "Y": 1877.4150390625,
+      "HP": 60,
+      "Distance": 538.3378490048888
+    },
+    {
+      "id": 58,
+      "type": 3004,
+      "X": -159.1103515625,
+      "Y": 1672.1611328125,
+      "HP": 20,
+      "Distance": 598.759478632977
+    }
+  ],
+  "weapon": 3,
+  "x": -738.27490234375,
+  "y": 1824.0865631103516,
+  "z": 0,
+  "screenshot": "020-court-recovery.png"
+}

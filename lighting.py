@@ -1,6 +1,6 @@
-"""Authored classic-sector light pools and cast-shadow wedges for Map 1.
+"""Authored classic-sector light pools and cast-shadow wedges for both maps.
 
-Brushes split only flat outdoor floor polygons. They never add overlaid walls,
+Brushes split flat floor polygons; moon shadows stay outdoors. They never add overlaid walls,
 change walk heights, alter actor behavior, or change tags/actions. Indoor fixtures use the
 existing ceiling sectors. Coordinates are in the map's 64-unit design grid.
 """
@@ -67,13 +67,16 @@ def apply_map1(l):
         return lower[:-1]+upper[:-1]
     # Moonlight comes from the northeast. All architectural shadows trail
     # southwest; the little decorative lamps light back into those shadows.
+    # One crisp moon-shadow boundary keeps balcony views within vanilla planes.
     for x,y,w,h in [(0,5,2,2),(13,5,2,2),(0,16,2,2),(14,16,2,2),(-14,23,3,3)]:
         footprint=[(x,y),(x+w,y),(x+w,y+h),(x,y+h)]
-        for dx,dy,light in [(-3.5,-2,144),(-3,-2,128)]:
+        for dx,dy,light in [(-3,-2,128)]:
             brush(hull(footprint+[(a+dx,b+dy) for a,b in footprint]),light,True)
     brush([(4,21),(14,21),(11,19),(1,19)],144,True)
+    # A single compact pool per fixture avoids overlapping plane fragments
+    # when the entire plaza is seen while turning on the raised balcony.
     for x,y,kind in sources:
-        for radius,light in [(1.25,192 if kind==35 else 208),(.625,224)]:
+        for radius,light in [(1,208)]:
             points=[(round((x+radius*math.cos(-i*math.pi/4))*8)/8,
                      round((y+radius*math.sin(-i*math.pi/4))*8)/8) for i in range(8)]
             brush(points,light)
@@ -129,13 +132,13 @@ def apply_map2(l):
     for x,y,w,h in [(1,5,4,2),(14,5,4,2),(1,18,4,2),(14,18,4,2),
                      (8,11,4,6),(-15,29,2,2),(-5,27,2,2)]:
         footprint=[(x,y),(x+w,y),(x+w,y+h),(x,y+h)]
-        for dx,dy,light in [(-3.5,-2,144),(-3,-2,128)]:
+        for dx,dy,light in [(-3,-2,144)]:
             brush(hull(footprint+[(a+dx,b+dy) for a,b in footprint]),light,True)
     brush([(8,28),(20,28),(17,26),(5,26)],144,True)
     for x,y,kind in sources:
         sector=l.cells[math.floor(x),math.floor(y)]
         covered=sector.roof!='F_SKY1'
-        for radius,light in [(1 if covered else 1.25,192 if kind==35 else 208),(.5 if covered else .625,224)]:
+        for radius,light in [(1,208)]:
             points=[(round((x+radius*math.cos(-i*math.pi/4))*8)/8,
                      round((y+radius*math.sin(-i*math.pi/4))*8)/8) for i in range(8)]
             brush(points,light)

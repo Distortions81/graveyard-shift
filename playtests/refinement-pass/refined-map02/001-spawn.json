@@ -1,0 +1,66 @@
+{
+  "angle": 90,
+  "armor": 0,
+  "attempt": "refined-map02",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 100,
+  "kills": 0,
+  "message": "",
+  "remaining": 54,
+  "seconds": 0.02857142857142857,
+  "secrets": 0,
+  "sector": 17,
+  "shells": 0,
+  "tic": 1,
+  "total": 54,
+  "visible": [
+    {
+      "id": 33,
+      "type": 3004,
+      "X": 352,
+      "Y": 96,
+      "HP": 20,
+      "Distance": 487.40947877529015
+    },
+    {
+      "id": 34,
+      "type": 3004,
+      "X": 800,
+      "Y": 224,
+      "HP": 20,
+      "Distance": 630.3268993149507
+    },
+    {
+      "id": 35,
+      "type": 3001,
+      "X": 288,
+      "Y": 800,
+      "HP": 60,
+      "Distance": 1180.1016905334898
+    },
+    {
+      "id": 36,
+      "type": 3004,
+      "X": 922.2626953125,
+      "Y": 922.2626953125,
+      "HP": 20,
+      "Distance": 1329.2208557384865
+    },
+    {
+      "id": 37,
+      "type": 3001,
+      "X": 416,
+      "Y": 1440,
+      "HP": 60,
+      "Distance": 1796.5656124951297
+    }
+  ],
+  "weapon": 2,
+  "x": 544,
+  "y": -352,
+  "z": 0,
+  "screenshot": "001-spawn.png"
+}

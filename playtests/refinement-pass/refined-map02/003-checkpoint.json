@@ -1,0 +1,41 @@
+{
+  "angle": 75.9375,
+  "armor": 100,
+  "attempt": "refined-map02",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 100,
+  "kills": 1,
+  "message": "Picked up green armor",
+  "remaining": 53,
+  "seconds": 2.7142857142857144,
+  "secrets": 0,
+  "sector": 14,
+  "shells": 7,
+  "tic": 95,
+  "total": 54,
+  "visible": [
+    {
+      "id": 40,
+      "type": 3001,
+      "X": 1034.830078125,
+      "Y": 906.830078125,
+      "HP": 60,
+      "Distance": 919.7975456211575
+    },
+    {
+      "id": 37,
+      "type": 3001,
+      "X": 416,
+      "Y": 1416,
+      "HP": 60,
+      "Distance": 1192.0166690020599
+    }
+  ],
+  "weapon": 3,
+  "x": 418.5901184082031,
+  "y": 223.98614501953125,
+  "z": 0
+}

@@ -1,0 +1,34 @@
+{
+  "angle": 101.25,
+  "armor": 41,
+  "attempt": "refined-map02",
+  "blue_key": true,
+  "bullets": 122,
+  "dead": false,
+  "exited": false,
+  "health": 57,
+  "kills": 33,
+  "message": "Picked up a box of bullets",
+  "remaining": 21,
+  "seconds": 79.02857142857142,
+  "secrets": 0,
+  "sector": 34,
+  "shells": 39,
+  "tic": 2766,
+  "total": 54,
+  "visible": [
+    {
+      "id": 73,
+      "type": 3004,
+      "X": 1622.3046875,
+      "Y": 1270.3046875,
+      "HP": 20,
+      "Distance": 410.2741096206532
+    }
+  ],
+  "weapon": 5,
+  "x": 1565.4348449707031,
+  "y": 863.9911804199219,
+  "z": 0,
+  "screenshot": "038-arena-ammo.png"
+}

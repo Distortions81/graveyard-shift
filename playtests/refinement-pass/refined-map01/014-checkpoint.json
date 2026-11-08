@@ -1,0 +1,33 @@
+{
+  "angle": 5.625,
+  "armor": 78,
+  "attempt": "refined-map01",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 78,
+  "kills": 9,
+  "message": "Picked up 4 shotgun shells",
+  "remaining": 27,
+  "seconds": 25.914285714285715,
+  "secrets": 0,
+  "sector": 4,
+  "shells": 22,
+  "tic": 907,
+  "total": 36,
+  "visible": [
+    {
+      "id": 72,
+      "type": 3004,
+      "X": 550.626953125,
+      "Y": 1862.626953125,
+      "HP": 20,
+      "Distance": 1227.2111435932436
+    }
+  ],
+  "weapon": 3,
+  "x": -672.0694580078125,
+  "y": 1757.4571990966797,
+  "z": 0
+}

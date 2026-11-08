@@ -1,0 +1,49 @@
+{
+  "angle": 88.59375,
+  "armor": 0,
+  "attempt": "refined-map01",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 100,
+  "kills": 0,
+  "message": "",
+  "remaining": 36,
+  "seconds": 3.2,
+  "secrets": 0,
+  "sector": 39,
+  "shells": 0,
+  "tic": 112,
+  "total": 36,
+  "visible": [
+    {
+      "id": 47,
+      "type": 3001,
+      "X": 160,
+      "Y": 864,
+      "HP": 60,
+      "Distance": 348.05100750504795
+    },
+    {
+      "id": 48,
+      "type": 3001,
+      "X": 837.0927734375,
+      "Y": 773.0927734375,
+      "HP": 60,
+      "Distance": 524.5223737578435
+    },
+    {
+      "id": 49,
+      "type": 3004,
+      "X": 271.9688262939453,
+      "Y": 1151.4351959228516,
+      "HP": 5,
+      "Distance": 583.2755525084508
+    }
+  ],
+  "weapon": 2,
+  "x": 351.9592590332031,
+  "y": 573.6706237792969,
+  "z": 0
+}

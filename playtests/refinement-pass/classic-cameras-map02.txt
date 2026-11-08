@@ -1,0 +1,5 @@
+midway: timed 140 gametics in 41 realtics (119.512192 fps)
+gallery: timed 140 gametics in 41 realtics (119.512192 fps)
+bumper: timed 140 gametics in 41 realtics (119.512192 fps)
+arena-east: timed 140 gametics in 41 realtics (119.512192 fps)
+redemption: timed 140 gametics in 41 realtics (119.512192 fps)

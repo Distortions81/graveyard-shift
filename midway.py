@@ -13,6 +13,7 @@ def art(api,base):
         ('GREFUND',['CREDIT ISSUED','IN REGRET'],128),
         ('GBPASS',['SKILL PASS','BLUE TOKEN','PLAY TO WORK'],256),
         ('GRPASS',['PRIZE PASS','RED TOKEN','NO CASH VALUE'],256),
+        ('GTRAINEX',['GHOST TRAIN','NEXT SHIFT','PRESS USE'],128),
         ('GNEXT',['TEAM BUILDING','GHOST TRAIN','NEXT SHIFT'],128)]:
         out[key]=api.sign(lines,(api.INK,api.CREAM),size=(width,128))
     im=base['GBOOTH'].copy();d=ImageDraw.Draw(im)
@@ -49,7 +50,7 @@ def art(api,base):
         im=Image.new('RGBA',(64,64),color);d=ImageDraw.Draw(im)
         for n in range(0,64,16):
             d.line((0,n,63,n),fill=(65,68,67));d.line((n,0,n,63),fill=(65,68,67))
-        if key=='GELECT':d.rectangle((24,24,39,39),fill=api.CREAM,outline=api.GOLD,width=2)
+        # GELECT is the dark conductive ceiling grid; lamps are separate GLAMP panels.
         out[key]=im
     return out
 
@@ -59,10 +60,10 @@ def make_level(api):
     l=api.Level('E1M2','Midway Massacre')
     street=S('midway promenade',ceil=384,flat='GPLANK',wall='GFACADE',light=176)
     entry=replace(street,label='midway arrival',wall='GBRICK',flat='GASPHALT',light=160)
-    gallery=S('skill assessment gallery',ceil=128,roof='GROOF',flat='GCHECK',wall='GTEAL',light=192)
+    gallery=S('skill assessment gallery',ceil=128,roof='GROOF',flat='GCHECK',wall='GTEAL',light=160)
     service=S('gallery service court',ceil=384,flat='GASPHALT',wall='GBRICK',light=160)
     arena=S('collision arena',floor=0,ceil=256,roof='GELECT',flat='GBFLOOR',wall='GMETAL',light=160)
-    prize=S('prize redemption hall',ceil=160,roof='GROOF',flat='GVELVET',wall='GWOOD',light=192)
+    prize=S('prize redemption hall',ceil=160,roof='GROOF',flat='GPLANK',wall='GWOOD',light=160)
     l.rect(4,-8,14,0,entry)
     l.rect(0,0,20,28,street)
     l.rect(-16,8,0,24,gallery)
@@ -99,20 +100,30 @@ def make_level(api):
         l.rect(-8,y,-7,y+1,replace(gallery,label='gallery ceiling fixture',roof='GLAMP',light=208))
     for x,y in [(-15,29),(-5,27)]:
         l.rect(x,y,x+2,y+2,replace(service,label='service crates',floor=48,wall='GCRATE',flat='GPLANK'))
+    # Deliberate ceiling banks break up the electrical grid. Light lands in
+    # the driving lanes, making the cars read as cover rather than glowing props.
+    for x in [27,39]:
+        for y in [9,16]:
+            l.rect(x,y,x+1,y+1,replace(arena,label='arena ceiling bank',roof='GLAMP',light=208))
     # Eight rounded, rubber-rimmed bumper cars; generous lanes connect both sides.
     for i,(x,y) in enumerate([(25,5),(31,5),(39,5),(25,11),(35,11),(41,12),(28,18),(37,18)]):
         l.round_area(x,y,(x-1,y-1,x+1,y+1),[
             (60,arena),
-            (48,replace(arena,label='bumper car rubber',floor=16,flat='GROOF',wall='GRUBBER',light=208)),
+            (48,replace(arena,label='bumper car rubber',floor=16,flat='GROOF',wall='GRUBBER',light=160)),
             (24,replace(arena,label='red bumper car' if i%2 else 'blue bumper car',floor=40,
-                         flat='GREDTOP' if i%2 else 'GPLANK',wall='GBCRED' if i%2 else 'GBCBLUE',light=208)),
-            (0,lambda wedge: replace(arena,label='bumper seat back' if wedge<4 else 'bumper seat cushion',floor=56 if wedge<4 else 40,flat='GSEAT',wall='GBCRED' if i%2 else 'GBCBLUE',light=208))],arena,sides=8)
+                         flat='GREDTOP' if i%2 else 'GPLANK',wall='GBCRED' if i%2 else 'GBCBLUE',light=160)),
+            (0,lambda wedge: replace(arena,label='bumper seat back' if wedge<4 else 'bumper seat cushion',floor=56 if wedge<4 else 40,flat='GSEAT',wall='GBCRED' if i%2 else 'GBCBLUE',light=160))],arena,sides=8)
     for x,y in [(23,2),(43,2),(23,19),(43,19)]:
         l.rect(x,y,x+1,y+1,replace(arena,label='arena roof support',floor=256,wall='GPOLE'))
     # Red token: a small raised control deck with ordinary 16-unit stairs.
     for i in range(3):
         l.rect(41+i,15,42+i,18,replace(arena,label=f'arena step {i+1}',floor=(i+1)*16,wall='GSTEP'))
     l.rect(44,14,46,20,replace(arena,label='collision control deck',floor=48,flat='GGRATE',wall='GSTEP',light=224))
+    # A carpet runner leads between the counters; side aisles remain legible.
+    l.rect(18,29,22,40,replace(prize,label='redemption carpet aisle',flat='GCARPET',light=176))
+    for x in [11,23]:
+        l.rect(x,30,x+4,32,replace(prize,label='prize counter light',light=176))
+        l.rect(x+1,31,x+3,32,replace(prize,label='prize ceiling bank',roof='GLAMP',light=208))
     # Prize counters, back displays and a central aisle with two flanking routes.
     for x in [10,22]:
         l.rect(x,32,x+6,34,replace(prize,label='prize service counter',floor=48,flat='GPLANK',wall='GWOOD'))
@@ -132,30 +143,32 @@ def make_level(api):
                     ((24,40),(26,40),'GREFUND'),((20,40),(22,40),'GNEXT')]:
         l.sign(a,b,tex)
     l.sign((-16,12),(-16,14),'SW1GARG',46,40)
-    l.sign((26,40),(28,40),'SW1EXIT',11,0)
+    l.sign((26,40),(28,40),'GTRAINEX',11,0)
     # Straightforward pistol start, with co-op/deathmatch starts also authored.
     for i,(x,y) in enumerate([(8,-6),(10,-6),(8,-7),(10,-7)],1):l.thing(x+.5,y+.5,i,angle=90)
     for x,y in [(7,3),(-5,16),(29,8),(20,37)]:l.thing(x+.5,y+.5,11)
     for x,y,t in [(8.5,3.5,2001),(9.5,4.5,2049),(6.5,3.5,2018),
                   (-12.5,28.5,5),(44.5,17.5,13),(-5.5,14.5,2008),
-                  (-6.5,21.5,2012),(-12.5,30.5,2049),(-3.5,29.5,2011),
-                  (17.5,25.5,2012),(22.5,9.5,2049),(32.5,3.5,2008),
-                  (43.5,10.5,2012),(30.5,20.5,2049),(27.5,26.5,2011),
-                  (18.5,29.5,2049),(9.5,37.5,2012),(26.5,37.5,2008),
-                  (-20.5,20.5,2002),(-20.5,22.5,2048),(-8.5,36.5,2019),
+                  (-6.5,21.5,2012),(-12.5,30.5,2049),(-3.5,12.5,2012),
+                  (17.5,25.5,2012),(22.5,9.5,2049),(22.5,11.5,2002),(24.5,13.5,2048),(32.5,3.5,2008),
+                  (43.5,10.5,2012),(30.5,20.5,2049),(27.5,26.5,2012),
+                  (18.5,29.5,2049),(-11.5,28.5,2012),(26.5,37.5,2008),
+                  (-20.5,20.5,8),(-20.5,22.5,2048),(-8.5,36.5,2019),
                   (49.5,6.5,2012),(50.5,7.5,2049)]:l.thing(x,y,t)
     # Most later groups are ambush-flagged: firing at the entrance does not
     # summon the entire map. HMP counts grow with area, not density.
     groups=[
       [(5,1,3004),(12,3,3004),(4,12,3001),(14,14,3004),(6,22,3001),(14,24,9),(3,25,3004),(18,16,3001)],
-      [(-4,11,3004),(-8,12,3001),(-13,13,3004),(-5,17,9),(-10,18,3001),(-14,22,3004),(-4,22,3001),(-9,9,3004),(-12,16,3001),(-8,20,3004)],
+      [(-4,11,3004),(-8,12,3001),(-13,13,3004),(-5,17,9),(-10,18,3001),(-14,22,3004),(-4,22,3001),(23,38,3004),(-12,16,3001),(17,30,3004)],
       [(-13,26,9),(-10,29,3001),(-4,27,3004),(-2,30,3001),(-14,30,3004),(-7,25,3004),(-6,30,3001),(-2,25,3004)],
       [(23,8,3004),(28,8,3001),(32,8,3004),(38,8,3001),(43,8,9),(23,14,3001),(29,14,3002),(33,16,3004),(38,15,3001),(43,13,3004),(25,20,3001),(32,20,9),(40,20,3004),(44,18,3001),(27,23,3004),(32,26,3001)],
-      [(10,30,3004),(18,30,9),(26,30,3001),(10,35,3001),(20,35,3002),(25,35,3004),(13,38,3004),(21,38,3001),(27,38,3001),(9,39,3004),(20,32,3004),(28,36,9)]]
+      [(10,30,3004),(13,35,9),(26,30,3001),(10,35,3001),(20,35,3002),(25,35,3004),(13,38,3004),(21,38,3001),(27,38,3001),(9,39,3004),(20,32,3004),(28,36,9)]]
     for gi,group in enumerate(groups):
         for j,(x,y,t) in enumerate(group):
             flags=(7 if j%3 else 6)|(8 if gi else 0)
             l.thing(x+.5,y+.5,t,flags,angle=270 if gi in [2,4] else 180)
+    # Two former gallery hitscanners now guard redemption, reducing the
+    # early doorway pile-up while keeping the overall enemy budget.
     # UV adds pressure at different heights; Easy removes one third of enemies.
     for x,y,t in [(12,9,3001),(-11,28,9),(34,12,3002),(41,20,9),(15,36,3001),(24,38,3001)]:l.thing(x+.5,y+.5,t,4|8)
     for x,y in [(-14.5,27.5),(-3.5,26.5),(24.5,2.5),(41.5,2.5)]:l.thing(x,y,2035)

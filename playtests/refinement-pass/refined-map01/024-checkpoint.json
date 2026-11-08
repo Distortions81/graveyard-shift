@@ -1,0 +1,33 @@
+{
+  "angle": 351.5625,
+  "armor": 46,
+  "attempt": "refined-map01",
+  "blue_key": false,
+  "bullets": 96,
+  "dead": false,
+  "exited": false,
+  "health": 24,
+  "kills": 14,
+  "message": "Picked up a stimpack",
+  "remaining": 22,
+  "seconds": 42.77142857142857,
+  "secrets": 1,
+  "sector": 4,
+  "shells": 38,
+  "tic": 1497,
+  "total": 36,
+  "visible": [
+    {
+      "id": 72,
+      "type": 3004,
+      "X": 582.3488616943359,
+      "Y": 1696.9707489013672,
+      "HP": 5,
+      "Distance": 944.9425439814169
+    }
+  ],
+  "weapon": 5,
+  "x": -354.08860778808594,
+  "y": 1823.4669036865234,
+  "z": 0
+}

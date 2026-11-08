@@ -1,0 +1,5 @@
+=== RUN   TestGraveyardShiftRecordedSessionReplay
+    graveyard_shift_playtest_integration_test.go:494: refined-map01: 5698 tics, kills=36, secrets=3, exited=true, dead=false; exact replay
+    graveyard_shift_playtest_integration_test.go:494: refined-map02: 6164 tics, kills=54, secrets=0, exited=true, dead=false; exact replay
+--- PASS: TestGraveyardShiftRecordedSessionReplay (0.90s)
+PASS

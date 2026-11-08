@@ -1,0 +1,6 @@
+arrival: timed 140 gametics in 41 realtics (119.512192 fps)
+plaza: timed 140 gametics in 41 realtics (119.512192 fps)
+yard: timed 140 gametics in 41 realtics (119.512192 fps)
+control: timed 140 gametics in 41 realtics (119.512192 fps)
+balcony: timed 140 gametics in 41 realtics (119.512192 fps)
+courtyard: timed 140 gametics in 41 realtics (119.512192 fps)

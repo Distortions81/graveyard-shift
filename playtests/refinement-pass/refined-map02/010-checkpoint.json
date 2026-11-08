@@ -1,0 +1,73 @@
+{
+  "angle": 180,
+  "armor": 80,
+  "attempt": "refined-map02",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 60,
+  "kills": 7,
+  "message": "USE: door active",
+  "remaining": 47,
+  "seconds": 23.65714285714286,
+  "secrets": 0,
+  "sector": 14,
+  "shells": 19,
+  "tic": 828,
+  "total": 54,
+  "visible": [
+    {
+      "id": 41,
+      "type": 3004,
+      "X": -224,
+      "Y": 736,
+      "HP": 20,
+      "Distance": 255.7588909671888
+    },
+    {
+      "id": 44,
+      "type": 9,
+      "X": -288,
+      "Y": 1120,
+      "HP": 30,
+      "Distance": 473.45837098816446
+    },
+    {
+      "id": 42,
+      "type": 3001,
+      "X": -480,
+      "Y": 800,
+      "HP": 60,
+      "Distance": 510.58209825528195
+    },
+    {
+      "id": 45,
+      "type": 3001,
+      "X": -608,
+      "Y": 1184,
+      "HP": 60,
+      "Distance": 760.8452234579426
+    },
+    {
+      "id": 49,
+      "type": 3001,
+      "X": -736,
+      "Y": 1056,
+      "HP": 60,
+      "Distance": 817.6931448035788
+    },
+    {
+      "id": 43,
+      "type": 3004,
+      "X": -800,
+      "Y": 864,
+      "HP": 20,
+      "Distance": 835.0668859790612
+    }
+  ],
+  "weapon": 3,
+  "x": 29.634033203125,
+  "y": 768.899658203125,
+  "z": 0
+}

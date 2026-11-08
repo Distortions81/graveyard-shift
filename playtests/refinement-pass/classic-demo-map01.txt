@@ -1,0 +1,36 @@
+timed 5698 gametics in 103 realtics (1936.213623 fps)
+
+                         Chocolate Doom 3.0.0
+Z_Init: Init zone memory allocation daemon. 
+zone memory: 0x776e6d1a8010, 1000000 allocated for zone
+Using /home/dist/.local/share/chocolate-doom/ for configuration and saves
+V_Init: allocate screens.
+M_LoadDefaults: Load system defaults.
+	default file: /tmp/graveyard-refine-c1.cfg
+saving config in /tmp/graveyard-refine-c1.cfg
+        extra configuration file: /tmp/graveyard-refine-extra1.cfg
+W_Init: Init WADfiles.
+ adding /tmp/graveyard-refinement-private.wad
+ adding /home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/refinement-pass/refined-map01/session.lmp
+Playing demo /home/dist/Documents/ChatGPT/github/graveyard-shift/playtests/refinement-pass/refined-map01/session.lmp.
+===========================================================================
+                            DOOM Shareware
+===========================================================================
+ Chocolate Doom is free software, covered by the GNU General Public
+ License.  There is NO warranty; not even for MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE. You are welcome to change and distribute
+ copies under certain conditions. See the source for more information.
+===========================================================================
+I_Init: Setting up machine state.
+NET_Init: Init network subsystem.
+M_Init: Init miscellaneous info.
+R_Init: Init DOOM refresh daemon - .....................
+P_Init: Init Playloop state.
+S_Init: Setting up sound.
+D_CheckNetGame: Checking network game status.
+startskill 2  deathmatch: 0  startmap: 1  startepisode: 1
+player 1 of 1 (1 nodes)
+Emulating the behavior of the 'Doom 1.9' executable.
+HU_Init: Setting up heads up display.
+ST_Init: Init status bar.
+CreateUpscaledTexture: Limited texture size to 0x0 (max 16000000 pixels, max texture size 0x0)

@@ -1,0 +1,33 @@
+{
+  "angle": 88.59375,
+  "armor": 94,
+  "attempt": "refined-map01",
+  "blue_key": false,
+  "bullets": 50,
+  "dead": false,
+  "exited": false,
+  "health": 85,
+  "kills": 2,
+  "message": "Picked up a box of shells",
+  "remaining": 34,
+  "seconds": 10.914285714285715,
+  "secrets": 0,
+  "sector": 10,
+  "shells": 26,
+  "tic": 382,
+  "total": 36,
+  "visible": [
+    {
+      "id": 58,
+      "type": 3001,
+      "X": -538.6826477050781,
+      "Y": 936.1995086669922,
+      "HP": 10,
+      "Distance": 266.4297529830135
+    }
+  ],
+  "weapon": 3,
+  "x": -543.0660400390625,
+  "y": 669.8058166503906,
+  "z": 0
+}

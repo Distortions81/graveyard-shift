@@ -3,13 +3,12 @@
 ## Map 1
 
 Map 1 uses four stock DOOM candelabra sprites and two tech-lamp sprites. Their
-small octagonal floor pools use classic sector lighting, with a brighter core
-close to each prop. The sprites come from the player's shareware IWAD; no base-game
+small octagonal floor pools each use one classic sector-light level. The sprites come from the player's shareware IWAD; no base-game
 sprite graphics are copied into this mapset.
 
 The broad shadows come from moonlight arriving from the northeast, with the
-booths and generator casting southwest-facing shadows. Dark cores and softer
-outer strips separate these from the little local lights. The balcony has a
+booths and generator casting southwest-facing shadows. Crisp shadow edges separate these from the little local lights; the simplified
+shadow polygons leave room within the classic renderer’s visible-plane limit. The balcony has a
 wider moon-shadow band. Local sprite lights illuminate back into those shadows.
 
 Light polygons keep the existing floor heights and textures. Exact rational
@@ -69,3 +68,42 @@ Selected framed surfaces fit full texture repeats: 384-unit outdoor walls,
 steps and control deck move together so their relative step heights are preserved.
 The deck uses riser trim rather than a cropped framed panel. The sky and wall
 changes do not change the map's enemy counts or progression locks.
+
+## Second refinement pass
+
+The security office now has two ceiling panels over the starter kit and staff
+route. Its darker ambient light makes those pools useful navigation cues. Ticket
+kiosks are 128 units tall so their complete artwork fits.
+
+Map 2 uses darker ambient light in the gallery and redemption hall, with local
+ceiling fixtures and existing sprite pools. Four separate ceiling lamps replace
+the arena’s repeating tiny light pattern; car surfaces no longer use the same
+brightness as the light sources. The redemption carpet defines a broad central
+aisle between timber floors.
+
+A denser first draft exceeded Chocolate Doom’s visible-plane limit. Both maps
+now use one compact light pool per sprite and a single moon-shadow boundary per
+object. Map 1’s balcony guardrail frames a 128-unit drop; the plaza pavement is
+continuous along the facade. Bumper cars share the arena ambient light, avoiding
+unnecessary ceiling islands. Full-demo checks supplement the fixed camera views.
+
+## Geometry cleanup
+
+`geometry.py` joins collinear, static solid-wall segments only when their
+textures, offsets, sectors and flags remain compatible. Junctions, two-sided
+lighting boundaries and every action/tag remain intact. Unreferenced vertices
+and sidedefs are removed before ZDBSP rebuilds ordinary classic nodes and
+blockmaps. Sectors are not merged across rooms, preserving sound propagation
+and the independent behavior of doors and secrets.
+
+Compared with the previous committed WAD:
+
+| Measure | Map 1 before → after | Map 2 before → after |
+| --- | ---: | ---: |
+| Linedefs | 1,297 → 963 | 1,494 → 1,146 |
+| Vertices | 1,178 → 864 | 1,495 → 1,180 |
+| Subsectors | 587 → 477 | 739 → 655 |
+| Sectors | 84 → 82 | 67 → 65 |
+
+The complete WAD drops from 1,958,858 to 1,544,580 bytes (21.1%), including the
+new signs. These are geometry and file-size reductions, not an FPS benchmark.
